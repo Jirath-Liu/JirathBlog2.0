@@ -1,0 +1,11 @@
+spring:
+  profiles:
+    active: dev
+
+msg:
+  success: 100
+  unLogin: 201
+  noPower: 202
+  noAccount: 301
+  passwordError: 302
+  defaultError: 700
