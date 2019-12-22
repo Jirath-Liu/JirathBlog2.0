@@ -1,13 +1,13 @@
-package com.jiarth.jirath_blog_back2;
+package com.jiarth.jirath_blog2;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class JirathBlogBack2Application {
+public class JirathBlog2Application {
 
     public static void main(String[] args) {
-        SpringApplication.run(JirathBlogBack2Application.class, args);
+        SpringApplication.run(JirathBlog2Application.class, args);
     }
 
 }
