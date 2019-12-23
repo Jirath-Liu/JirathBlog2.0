@@ -2,6 +2,8 @@ package com.jirath.jirath_blog2.controller;
 
 import com.jirath.jirath_blog2.conf.shiro.MsgValueUtil;
 import com.jirath.jirath_blog2.dao.UserIdentityDao;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,7 +19,8 @@ public class Test {
     @RequestMapping("test")
     @ResponseBody
     public Object userIdentities(){
-        return msgValueUtil.getDefaultError();
+        Subject subject= SecurityUtils.getSubject();
+        return subject.hasRole("user");
 //                userIdentityDao.getAll();
     }
 }

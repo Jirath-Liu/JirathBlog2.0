@@ -9,3 +9,6 @@ msg:
   noAccount: 301
   passwordError: 302
   defaultError: 700
+
+shiro-role: user,admin,owner
+shiro-salt: jirath

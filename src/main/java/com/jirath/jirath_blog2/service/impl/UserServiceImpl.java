@@ -1,6 +1,7 @@
 package com.jirath.jirath_blog2.service.impl;
 
 import com.jirath.jirath_blog2.dao.UserDao;
+import com.jirath.jirath_blog2.dao.UserIdentityDao;
 import com.jirath.jirath_blog2.pojo.User;
 import com.jirath.jirath_blog2.service.UserSerivce;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,8 @@ import org.springframework.stereotype.Service;
 public class UserServiceImpl implements UserSerivce {
     @Autowired
     UserDao userDao;
+    @Autowired
+    UserIdentityDao userIdentityDao;
 
     /**
      * 用账号拿数据库的信息
@@ -19,5 +22,10 @@ public class UserServiceImpl implements UserSerivce {
     @Override
     public User getInfoByAccount(String account){
         return userDao.getUserMsgByAccount(account);
+    }
+
+    @Override
+    public int getIdentityById(int id) {
+        return userIdentityDao.getIdentityById(id);
     }
 }

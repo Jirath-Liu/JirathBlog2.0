@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.security.Security;
 
 @Controller
 public class UserController {
@@ -37,6 +36,26 @@ public class UserController {
                 .code(msgValueUtil.getSuccess())
                 .msg("login")
                 .data(subject.getPrincipal())
+                .build();
+    }
+    @RequestMapping("/unLogin")
+    @ResponseBody
+    public Object unLogin() {
+        Subject subject;
+        try {
+            subject = SecurityUtils.getSubject();
+            subject.logout();
+        }catch (Exception e){
+            return ResultVo.builder()
+                    .code(msgValueUtil.getDefaultError())
+                    .msg("error")
+                    .data(null)
+                    .build();
+        }
+        return ResultVo.builder()
+                .code(msgValueUtil.getSuccess())
+                .msg("unLogin")
+                .data("success")
                 .build();
     }
 }

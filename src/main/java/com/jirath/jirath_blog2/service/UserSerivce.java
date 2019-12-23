@@ -5,4 +5,5 @@ import org.springframework.stereotype.Service;
 
 public interface UserSerivce {
     User getInfoByAccount(String account);
+    int getIdentityById(int id);
 }

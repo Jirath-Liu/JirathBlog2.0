@@ -9,4 +9,5 @@ import java.util.List;
 @Repository
 public interface UserIdentityDao {
     List<UserIdentity> getAll();
+    Integer getIdentityById(int id);
 }

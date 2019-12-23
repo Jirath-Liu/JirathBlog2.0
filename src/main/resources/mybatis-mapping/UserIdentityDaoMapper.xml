@@ -5,4 +5,7 @@
     <select id="getAll" resultType="com.jirath.jirath_blog2.pojo.UserIdentity">
         SELECT * FROM user_identity
     </select>
+    <select id="getIdentityById" resultType="java.lang.Integer" parameterType="int">
+        SELECT user_identity FROM user_identity WHERE user_id=#{value}
+    </select>
 </mapper>
