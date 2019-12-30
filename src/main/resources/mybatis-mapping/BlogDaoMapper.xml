@@ -1,4 +1,24 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.jirath.jirathblog2.dao.BlogDao">
+    <insert id="addPassage">
+        INSERT INTO blog (blog_content, blog_title, blog_author, blog_comment_quantity, blog_create_time, blog_last_fix_time)
+                VALUES (#{blogContent},#{blogTitle},#{blogAuthor},0,now(),now())
+    </insert>
+    <delete id="deleteBlogById">
+        DELETE FROM blog WHERE blog_id=#{value}
+    </delete>
+    <select id="getSpecificPage" resultType="com.jirath.jirathblog2.pojo.Blog" parameterType="PageScope">
+        SELECT * FROM blog LIMIT #{skipNum},#{requireNum}
+    </select>
+    <select id="getBlogNum" resultType="java.lang.Integer">
+        SELECT COUNT(*) FROM blog
+    </select>
+    <select id="getLatest" resultType="Blog">
+        SELECT * FROM blog ORDER BY blog_id DESC LIMIT 1
+    </select>
+    <select id="getRandPsg" resultType="Blog">
+        SELECT * FROM blog ORDER BY RAND() LIMIT 1;
+    </select>
+
 </mapper>

@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.jirath.jirathblog2.dao.UserDao">
-    <insert id="insertUser" parameterType="User" useGeneratedKeys="true" keyProperty="int">
-        INSERT INTO user(user_name, user_account,user_password, user_mail)
+    <insert id="insertUser" parameterType="User" useGeneratedKeys="true" keyProperty="userId">
+        INSERT IGNORE INTO user(user_name, user_account,user_password, user_mail)
         VALUES (#{userName},#{userAccount},#{userPassword},#{userMail})
-        WHERE NOT EXISTS (SELECT * FROM user WHERE user_account=#{userAccount})
     </insert>
     <select id="getUserMsgByAccount" resultType="com.jirath.jirathblog2.pojo.User" parameterType="string">
         SELECT * FROM user WHERE user_account=#{value}

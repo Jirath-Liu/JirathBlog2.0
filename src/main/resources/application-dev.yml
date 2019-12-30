@@ -11,7 +11,7 @@ spring:
     password: root
 
 mybatis:
-  type-aliases-package: com.jirath.jirath_blog2.pojo
+  type-aliases-package: com.jirath.jirathblog2.pojo,com.jirath.jirathblog2.query
   mapper-locations: classpath:mybatis-mapping/*Mapper.xml
   configuration:
     map-underscore-to-camel-case: true

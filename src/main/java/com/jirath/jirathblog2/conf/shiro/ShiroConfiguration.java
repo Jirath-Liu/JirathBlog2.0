@@ -5,6 +5,8 @@ import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -12,8 +14,15 @@ import org.springframework.context.annotation.Configuration;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+/**
+ * @author Jirath
+ */
 @Configuration
 public class ShiroConfiguration {
+
+    /**
+     * ===================== Shiro加密设置  ===============================================
+     */
     @Bean
     public UserRealm userRealm(HashedCredentialsMatcher hashedCredentialsMatcher){
         UserRealm userRealm = new UserRealm();
@@ -33,12 +42,17 @@ public class ShiroConfiguration {
         credentialsMatcher.setStoredCredentialsHexEncoded(true);
         return credentialsMatcher;
     }
+    /**
+     * ============================= Shiro基础设置 =====================================================
+     */
+
     @Bean
     public ShiroFilterFactoryBean shiroFilterFactoryBean(DefaultWebSecurityManager defaultWebSecurityManager){
         ShiroFilterFactoryBean shiroFilterFactoryBean=new ShiroFilterFactoryBean();
         shiroFilterFactoryBean.setSecurityManager(defaultWebSecurityManager);
         Map<String, String> map = new LinkedHashMap<>();
-        map.put("/test/*","authc");
+        map.put("/user/*","authc");
+        map.put("/admin/**","roles[owner]");
         shiroFilterFactoryBean.setLoginUrl("/login");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(map);
         return shiroFilterFactoryBean;
@@ -50,6 +64,9 @@ public class ShiroConfiguration {
         return defaultWebSecurityManager;
     }
 
+    /**
+     * ============================= Shiro注解设置  ===============================================
+     */
     /**
      *  开启Shiro的注解(如@RequiresRoles,@RequiresPermissions),需借助SpringAOP扫描使用Shiro注解的类,并在必要时进行安全逻辑验证
      * 配置以下两个bean(DefaultAdvisorAutoProxyCreator和AuthorizationAttributeSourceAdvisor)即可实现此功能

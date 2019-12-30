@@ -3,6 +3,9 @@ package com.jirath.jirathblog2.vo;
 import lombok.Builder;
 import lombok.Data;
 
+/**
+ * @author Jirath
+ */
 @Data
 @Builder
 public class ResultVo {

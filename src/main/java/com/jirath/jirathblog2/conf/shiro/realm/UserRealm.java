@@ -1,15 +1,16 @@
 package com.jirath.jirathblog2.conf.shiro.realm;
 
-import com.jirath.jirathblog2.conf.shiro.MsgValueUtil;
+import com.jirath.jirathblog2.util.MsgValueUtil;
 import com.jirath.jirathblog2.pojo.User;
-import com.jirath.jirathblog2.service.UserSerivce;
+import com.jirath.jirathblog2.service.UserService;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
-import org.apache.shiro.crypto.hash.SimpleHash;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 
@@ -17,7 +18,11 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * @author Jirath
+ */
 public class UserRealm extends AuthorizingRealm {
+    private final Logger logger = LoggerFactory.getLogger(getClass());
     @Value("${shiro-salt}")
     String saltSetting;
     @Value("${shiro-role}")
@@ -25,14 +30,15 @@ public class UserRealm extends AuthorizingRealm {
     @Autowired
     MsgValueUtil msgValueUtil;
     @Autowired
-    UserSerivce userSerivce;
+    UserService userService;
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
         String account= principalCollection.getPrimaryPrincipal().toString();
-        int userIdentity=userSerivce.getIdentityById(Integer.valueOf(account));
+        int userIdentity= userService.getIdentityById(Integer.valueOf(account));
         SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
         Set<String> rolesSet=new HashSet<>();
         rolesSet.add(roles.get(userIdentity));
+        logger.info("验证授权:"+account+" 权限:"+roles.get(userIdentity));
         info.setRoles(rolesSet);
         return info;
     }
@@ -42,32 +48,22 @@ public class UserRealm extends AuthorizingRealm {
         UsernamePasswordToken passwordToken= (UsernamePasswordToken) authenticationToken;
         String account=passwordToken.getPrincipal().toString();
         String password=passwordToken.getPassword().toString();
-        User userInfo=userSerivce.getInfoByAccount(account);
-        System.out.println(account+"\n"+userInfo);
+        User userInfo= userService.getInfoByAccount(account);
         if (userInfo==null){
             throw new UnknownAccountException();
         }
         //自定义盐值,配置文件中配置
-        ByteSource salt = ByteSource.Util.bytes("jirath");
-
-        //数据库也必须是加密过的！！！
-        //这里因为数据库未加密，将数据库结果加密一下
-        String hashAlgorithmName = "MD5";
-        //加密次数
-        int hashInteractions = 1024;
-        //原密码
-        //将得到的result放到数据库中就行了。
-        String result = new SimpleHash(hashAlgorithmName, userInfo.getUserPassword(), ByteSource.Util.bytes(salt), hashInteractions).toHex();
-        System.out.println(result);
+        ByteSource salt = ByteSource.Util.bytes(saltSetting);
         //因为系统识别用户使用的是数据库唯一标识，即userId,这里将用户登录后，获取的UserId作为principal（当事人）传入
         SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(
                 //安全数据
                 userInfo.getUserId(),
                 //密码
-                result,
+                userInfo.getUserPassword(),
                 salt,
                 getName()
         );
+        logger.info("用户登录:"+userInfo.getBasicMsg());
         return authenticationInfo;
     }
 }

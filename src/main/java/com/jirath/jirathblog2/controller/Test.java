@@ -1,6 +1,6 @@
 package com.jirath.jirathblog2.controller;
 
-import com.jirath.jirathblog2.conf.shiro.MsgValueUtil;
+import com.jirath.jirathblog2.util.MsgValueUtil;
 import com.jirath.jirathblog2.dao.UserIdentityDao;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
@@ -9,6 +9,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+/**
+ * @author Jirath
+ */
 @RequestMapping("/test")
 @Controller
 public class Test {
@@ -21,28 +24,5 @@ public class Test {
     public Object userIdentities(){
         Subject subject= SecurityUtils.getSubject();
         return subject.hasRole("user");
-//                userIdentityDao.getAll();
     }
 }
-////////////////////////////////////////////////////////////////////
-//                          _ooOoo_                               //
-//                         o8888888o                              //
-//                         88" . "88                              //
-//                         (| ^_^ |)                              //
-//                         O\  =  /O                              //
-//                      ____/`---'\____                           //
-//                    .'  \\|     |//  `.                         //
-//                   /  \\|||  :  |||//  \                        //
-//                  /  _||||| -:- |||||-  \                       //
-//                  |   | \\\  -  /// |   |                       //
-//                  | \_|  ''\---/''  |   |                       //
-//                  \  .-\__  `-`  ___/-. /                       //
-//                ___`. .'  /--.--\  `. . ___                     //
-//              ."" '<  `.___\_<|>_/___.'  >'"".                  //
-//            | | :  `- \`.;`\ _ /`;.`/ - ` : | |                 //
-//            \  \ `-.   \_ __\ /__ _/   .-` /  /                 //
-//      ========`-.____`-.___\_____/___.-`____.-'========         //
-//                           `=---='                              //
-//      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^        //
-//         佛祖保佑       永无BUG     永不修改                  //
-////////////////////////////////////////////////////////////////////

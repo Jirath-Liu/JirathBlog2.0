@@ -2,6 +2,9 @@ package com.jirath.jirathblog2.pojo;
 
 import lombok.Data;
 
+/**
+ * @author Jirath
+ */
 @Data
 public class User {
 
@@ -11,4 +14,8 @@ public class User {
   private String userPassword;
   private String userMail;
 
+  public String getBasicMsg(){
+    return "userId="+userId+
+            "userAccount="+userAccount;
+  }
 }

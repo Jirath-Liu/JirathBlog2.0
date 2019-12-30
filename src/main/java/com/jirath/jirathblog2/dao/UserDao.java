@@ -3,6 +3,9 @@ package com.jirath.jirathblog2.dao;
 import com.jirath.jirathblog2.pojo.User;
 import org.springframework.stereotype.Repository;
 
+/**
+ * @author Jirath
+ */
 @Repository
 public interface UserDao {
     /**
@@ -18,4 +21,5 @@ public interface UserDao {
      * @return 已存在则返回0成功为1
      */
     int insertUser(User user);
+
 }
