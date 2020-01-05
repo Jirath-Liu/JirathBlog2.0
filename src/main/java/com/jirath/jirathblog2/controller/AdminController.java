@@ -22,7 +22,13 @@ public class AdminController {
     BlogContentService blogContentService;
     @Autowired
     MsgValueUtil msgValueUtil;
-    @RequestMapping("/add")
+
+    /**
+     * 添加文章
+     * @param blog 文章的内容
+     * @return
+     */
+    @RequestMapping("/blog/add")
     @ResponseBody
     public Object addPassage(Blog blog){
         try {
@@ -44,9 +50,43 @@ public class AdminController {
     }
 
     @Transactional
-    @RequestMapping("/delete/{blogId}")
+    @RequestMapping("/blog/delete/{blogId}")
     public Object deleteBlog(@PathVariable int blogId) {
-        blogContentService.delete(blogId);
-        return ResultVo.builder().build();
+        try {
+            blogContentService.delete(blogId);
+            return ResultVo.builder()
+                    .code(msgValueUtil.getSuccess())
+                    .msg("delete")
+                    .build();
+        }catch (Exception e){
+            e.printStackTrace();
+            return ResultVo.builder()
+                    .code(msgValueUtil.getDefaultError())
+                    .msg("deleteError")
+                    .build();
+        }
+
+    }
+
+    /**
+     * 只可修改标题，作者，内容
+     * @param blog
+     * @return
+     */
+    @RequestMapping("/blog/fix")
+    public Object fixBlog(Blog blog){
+        try {
+            blogContentService.fix(blog);
+            return ResultVo.builder()
+                    .code(msgValueUtil.getSuccess())
+                    .msg("fix")
+                    .build();
+        }catch (Exception e){
+            e.printStackTrace();
+            return ResultVo.builder()
+                    .code(msgValueUtil.getDefaultError())
+                    .msg("fixError")
+                    .build();
+        }
     }
 }

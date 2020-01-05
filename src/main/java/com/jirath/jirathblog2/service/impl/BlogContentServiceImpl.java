@@ -1,6 +1,9 @@
 package com.jirath.jirathblog2.service.impl;
 
+import com.jirath.jirathblog2.dao.BlogColumnDao;
 import com.jirath.jirathblog2.dao.BlogDao;
+import com.jirath.jirathblog2.dao.BlogTagDao;
+import com.jirath.jirathblog2.dao.CommentDao;
 import com.jirath.jirathblog2.pojo.Blog;
 import com.jirath.jirathblog2.query.PageScope;
 import com.jirath.jirathblog2.service.BlogContentService;
@@ -19,6 +22,12 @@ import java.util.List;
 public class BlogContentServiceImpl implements BlogContentService {
     @Autowired
     BlogDao blogDao;
+    @Autowired
+    BlogColumnDao blogColumnDao;
+    @Autowired
+    BlogTagDao blogTagDao;
+    @Autowired
+    CommentDao commentDao;
     @Value("${blog-num-every-page}")
     int pageBlogNum;
     @Override
@@ -40,7 +49,6 @@ public class BlogContentServiceImpl implements BlogContentService {
 
     @Override
     public void addPassage(Blog blog) {
-
         blogDao.addPassage(blog);
     }
 
@@ -56,6 +64,14 @@ public class BlogContentServiceImpl implements BlogContentService {
 
     @Override
     public void delete(int blogId) {
+        commentDao.deleteByBlogId(blogId);
+        blogTagDao.deleteByBlogId(blogId);
+        blogColumnDao.deleteByBlogId(blogId);
         blogDao.deleteBlogById(blogId);
+    }
+
+    @Override
+    public void fix(Blog blog) {
+
     }
 }

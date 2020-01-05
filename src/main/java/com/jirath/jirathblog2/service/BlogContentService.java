@@ -46,4 +46,10 @@ public interface BlogContentService {
      * @param blogId
      */
     void delete(int blogId);
+
+    /**
+     * 修改文章内容，全部替换
+     * @param blog 文章内容
+     */
+    void fix(Blog blog);
 }

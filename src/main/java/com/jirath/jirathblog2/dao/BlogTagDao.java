@@ -7,4 +7,9 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface BlogTagDao {
+    /**
+     * 根据文章Id删除记录
+     * @param blogId
+     */
+    void deleteByBlogId(int blogId);
 }

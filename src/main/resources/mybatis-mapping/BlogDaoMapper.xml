@@ -5,6 +5,14 @@
         INSERT INTO blog (blog_content, blog_title, blog_author, blog_comment_quantity, blog_create_time, blog_last_fix_time)
                 VALUES (#{blogContent},#{blogTitle},#{blogAuthor},0,now(),now())
     </insert>
+    <update id="fixCommentNum" parameterType="int">
+        UPDATE blog SET blog_comment_quantity=blog_comment_quantity+1 WHERE blog_id=#{value}
+    </update>
+    <update id="fixBlog" parameterType="Blog">
+        UPDATE blog SET blog_content=#{blogContent} , blog_title=#{blogTitle},
+         blog_author=#{blogAuthor}, blog_last_fix_time=now()
+        WHERE blog_id=#{blogId}
+    </update>
     <delete id="deleteBlogById">
         DELETE FROM blog WHERE blog_id=#{value}
     </delete>
@@ -14,11 +22,14 @@
     <select id="getBlogNum" resultType="java.lang.Integer">
         SELECT COUNT(*) FROM blog
     </select>
-    <select id="getLatest" resultType="Blog">
+    <select id="getLatest" resultType="com.jirath.jirathblog2.pojo.Blog">
         SELECT * FROM blog ORDER BY blog_id DESC LIMIT 1
     </select>
     <select id="getRandPsg" resultType="Blog">
         SELECT * FROM blog ORDER BY RAND() LIMIT 1;
+    </select>
+    <select id="getCommentNum" resultType="java.lang.Integer" parameterType="int">
+        SELECT blog_comment_quantity FROM blog WHERE blog_id=#{value}
     </select>
 
 </mapper>
