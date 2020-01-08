@@ -2,8 +2,11 @@ package com.jirath.jirathblog2.controller;
 
 import com.jirath.jirathblog2.pojo.Blog;
 import com.jirath.jirathblog2.service.BlogContentService;
+import com.jirath.jirathblog2.service.ColumnService;
 import com.jirath.jirathblog2.util.MsgValueUtil;
 import com.jirath.jirathblog2.vo.ResultVo;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,10 +21,18 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequestMapping("/admin")
 @Controller
 public class AdminController {
+    private final Logger logger = LoggerFactory.getLogger(getClass());
     @Autowired
     BlogContentService blogContentService;
     @Autowired
     MsgValueUtil msgValueUtil;
+    @Autowired
+    ColumnService columnService;
+    /**
+     * ======================================================================================
+     *                          文章相关
+     * ======================================================================================
+     */
 
     /**
      * 添加文章
@@ -33,6 +44,7 @@ public class AdminController {
     public Object addPassage(Blog blog){
         try {
             blogContentService.addPassage(blog);
+            logger.info("添加文章："+blog.toString());
             return ResultVo.builder()
                     .code(msgValueUtil.getSuccess())
                     .msg("addPassage")
@@ -86,6 +98,43 @@ public class AdminController {
             return ResultVo.builder()
                     .code(msgValueUtil.getDefaultError())
                     .msg("fixError")
+                    .build();
+        }
+    }
+    /**
+     * ======================================================================================
+     *                          分类/专栏相关
+     * ======================================================================================
+     */
+    @RequestMapping("/column/add")
+    public Object addColumn(@PathVariable String presentation){
+        try {
+            columnService.addColumn(presentation);
+            return ResultVo.builder()
+                    .code(msgValueUtil.getSuccess())
+                    .msg("addColumn")
+                    .build();
+        }catch (Exception e){
+            e.printStackTrace();
+            return ResultVo.builder()
+                    .code(msgValueUtil.getDefaultError())
+                    .msg("addError")
+                    .build();
+        }
+    }
+    @RequestMapping("/column/fix/{columnId}/{name}")
+    public Object fixColumn(@PathVariable int columnId,@PathVariable String name){
+        try {
+            columnService.fixColumnMsg(columnId,name);
+            return ResultVo.builder()
+                    .code(msgValueUtil.getSuccess())
+                    .msg("addColumn")
+                    .build();
+        }catch (Exception e){
+            e.printStackTrace();
+            return ResultVo.builder()
+                    .code(msgValueUtil.getDefaultError())
+                    .msg("addError")
                     .build();
         }
     }

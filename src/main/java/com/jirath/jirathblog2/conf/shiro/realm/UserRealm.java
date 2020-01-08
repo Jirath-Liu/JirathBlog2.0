@@ -37,8 +37,10 @@ public class UserRealm extends AuthorizingRealm {
         int userIdentity= userService.getIdentityById(Integer.valueOf(account));
         SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
         Set<String> rolesSet=new HashSet<>();
-        rolesSet.add(roles.get(userIdentity));
-        logger.info("验证授权:"+account+" 权限:"+roles.get(userIdentity));
+        for(int i=0;i<=userIdentity;i++){
+            rolesSet.add(roles.get(i));
+        }
+        logger.info("验证授权:"+account+" 权限:"+rolesSet);
         info.setRoles(rolesSet);
         return info;
     }

@@ -1,6 +1,7 @@
 package com.jirath.jirathblog2.controller;
 
 import com.jirath.jirathblog2.exception.ExistedAccountException;
+import com.jirath.jirathblog2.service.ColumnService;
 import com.jirath.jirathblog2.util.MsgValueUtil;
 import com.jirath.jirathblog2.pojo.User;
 import com.jirath.jirathblog2.service.UserService;
@@ -26,6 +27,8 @@ public class UserBasicController {
     UserService userService;
     @Autowired
     MsgValueUtil msgValueUtil;
+    @Autowired
+    ColumnService columnService;
     @RequestMapping("/loginAccount")
     @ResponseBody
     public Object login(@RequestParam String account,@RequestParam String password) {

@@ -1,6 +1,7 @@
 package com.jirath.jirathblog2.controller;
 
 import com.jirath.jirathblog2.pojo.Blog;
+import com.jirath.jirathblog2.service.ColumnService;
 import com.jirath.jirathblog2.util.MsgValueUtil;
 import com.jirath.jirathblog2.service.BlogContentService;
 import com.jirath.jirathblog2.vo.DefaultPageMsg;
@@ -22,6 +23,8 @@ public class BlogContentController {
     MsgValueUtil msgValueUtil;
     @Autowired
     BlogContentService blogContentService;
+    @Autowired
+    ColumnService columnService;
     @RequestMapping("/defaultPage")
     @ResponseBody
     public Object getDefaultPageContent(){
@@ -92,4 +95,6 @@ public class BlogContentController {
         }
 
     }
+
+
 }

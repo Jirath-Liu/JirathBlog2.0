@@ -11,4 +11,8 @@ public class Column {
   private int columnId;
   private String columnPresentation;
 
+  public Column(int columnId, String columnPresentation) {
+    this.columnId = columnId;
+    this.columnPresentation = columnPresentation;
+  }
 }

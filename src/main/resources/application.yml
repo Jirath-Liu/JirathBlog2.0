@@ -15,3 +15,6 @@ shiro-role: user,admin,owner
 shiro-salt: jirath
 
 blog-num-every-page: 5
+
+cors:
+  allowedHeader: GFkk6vdyDOE1TQJ4UKiPq9
