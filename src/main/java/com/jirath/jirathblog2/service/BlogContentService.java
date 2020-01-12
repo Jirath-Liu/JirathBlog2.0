@@ -10,6 +10,12 @@ import java.util.List;
  */
 public interface BlogContentService {
     /**
+     * 根据文章号获取内容
+     * @param id 文章号
+     * @return 文章内容
+     */
+    Blog getPsgById(int id);
+    /**
      * 获取首页的信息，前五条
      * @return 首页博客信息
      */

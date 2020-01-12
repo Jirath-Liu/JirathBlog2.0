@@ -12,6 +12,17 @@ import java.util.List;
 @Repository
 public interface BlogDao {
     /**
+     * 根据分类删除文章，包含子查询分类信息
+     * @param columnId
+     */
+    void deleteByColumn(int columnId);
+    /**
+     * 根据文章号获取内容
+     * @param blogIdList 文章号
+     * @return 完整内容
+     */
+    List<Blog> getMsgByBlogIdList(List<Integer> blogIdList);
+    /**
      * 获取指定排序范围的blog
      * @param pageScope 页面范围，skipNum为跳过的数目，requireNum为需要的数目
      * @return 指定范围的博客的全部信息
@@ -69,4 +80,11 @@ public interface BlogDao {
      * @return
      */
     int fixCommentNum(int blogId);
+
+    /**
+     * 由id获取文章信息
+     * @param id 文章id号
+     * @return 文章信息
+     */
+    Blog getMsgById(int id);
 }

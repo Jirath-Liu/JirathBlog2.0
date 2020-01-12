@@ -25,6 +25,24 @@ public class BlogContentController {
     BlogContentService blogContentService;
     @Autowired
     ColumnService columnService;
+    @RequestMapping("/{blogId}")
+    public Object getPsgById(@PathVariable int blogId){
+        try {
+            return ResultVo.builder()
+                    .code(msgValueUtil.getSuccess())
+                    .msg(blogId+"content")
+                    .data(blogContentService.getPsgById(blogId))
+                    .build();
+        }catch (Exception e){
+            e.printStackTrace();
+            return ResultVo.builder()
+                    .code(msgValueUtil.getDefaultError())
+                    .msg("contentError")
+                    .data(null)
+                    .build();
+        }
+
+    }
     @RequestMapping("/defaultPage")
     @ResponseBody
     public Object getDefaultPageContent(){
@@ -62,14 +80,14 @@ public class BlogContentController {
             Blog blog = blogContentService.getRand();
             return ResultVo.builder()
                     .code(msgValueUtil.getSuccess())
-                    .msg("defaultPage")
+                    .msg("recommend")
                     .data(blog)
                     .build();
         }catch (Exception e){
             e.printStackTrace();
             return ResultVo.builder()
                     .code(msgValueUtil.getDefaultError())
-                    .msg("LatestError")
+                    .msg("RecommendError")
                     .data(null)
                     .build();
         }
@@ -82,7 +100,7 @@ public class BlogContentController {
             Blog blog = blogContentService.getLatest();
             return ResultVo.builder()
                     .code(msgValueUtil.getSuccess())
-                    .msg("defaultPage")
+                    .msg("latest")
                     .data(blog)
                     .build();
         }catch (Exception e){

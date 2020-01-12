@@ -8,4 +8,7 @@
     <delete id="deleteByBlogId" parameterType="int">
         DELETE FROM comment WHERE blog_id=#{value}
     </delete>
+    <delete id="deleteByComId">
+        DELETE FROM comment WHERE comment_id=#{value}
+    </delete>
 </mapper>

@@ -11,4 +11,8 @@ public class BlogColumn {
   private int blogId;
   private int columnId;
 
+  public BlogColumn(int blogId, int columnId) {
+    this.blogId = blogId;
+    this.columnId = columnId;
+  }
 }

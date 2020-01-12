@@ -12,4 +12,10 @@ public interface CommentService {
      * @param comment
      */
     void comment(Comment comment);
+
+    /**
+     * 删评论
+     * @param commentId 评论号
+     */
+    void delComment(int commentId);
 }

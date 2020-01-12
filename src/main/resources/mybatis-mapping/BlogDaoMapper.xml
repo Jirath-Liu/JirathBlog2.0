@@ -16,6 +16,9 @@
     <delete id="deleteBlogById">
         DELETE FROM blog WHERE blog_id=#{value}
     </delete>
+    <delete id="deleteByColumn" parameterType="int">
+        DELETE FROM blog WHERE blog_id IN (SELECT blog_id FROM blog_column WHERE column_id=#{value})
+    </delete>
     <select id="getSpecificPage" resultType="com.jirath.jirathblog2.pojo.Blog" parameterType="PageScope">
         SELECT * FROM blog LIMIT #{skipNum},#{requireNum}
     </select>
@@ -25,11 +28,20 @@
     <select id="getLatest" resultType="com.jirath.jirathblog2.pojo.Blog">
         SELECT * FROM blog ORDER BY blog_id DESC LIMIT 1
     </select>
-    <select id="getRandPsg" resultType="Blog">
+    <select id="getRandPsg" resultType="com.jirath.jirathblog2.pojo.Blog">
         SELECT * FROM blog ORDER BY RAND() LIMIT 1;
     </select>
     <select id="getCommentNum" resultType="java.lang.Integer" parameterType="int">
         SELECT blog_comment_quantity FROM blog WHERE blog_id=#{value}
+    </select>
+    <select id="getMsgByBlogIdList" parameterType="java.util.List" resultType="com.jirath.jirathblog2.pojo.Blog">
+        select * from blog where id in
+        <foreach collection="list" index="index" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
+    <select id="getMsgById" resultType="com.jirath.jirathblog2.pojo.Blog">
+        SELECT * FROM blog WHERE blog_id=#{value}
     </select>
 
 </mapper>

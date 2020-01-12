@@ -1,7 +1,22 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.jirath.jirathblog2.dao.BlogTagDao">
+    <insert id="addMsg" parameterType="BlogTag">
+        INSERT INTO blog_tag (blog_id, tag_id) values (#{blogId},#{tagId})
+    </insert>
     <delete id="deleteByBlogId" parameterType="int">
         DELETE FROM blog_tag WHERE blog_id=#{value}
     </delete>
+    <delete id="delByTag" parameterType="int">
+        DELETE FROM blog_tag WHERE tag_id=#{value}
+    </delete>
+    <delete id="delSpecificRecord" parameterType="BlogTag">
+        DELETE FROM blog_tag WHERE tag_id=#{tagId} AND blog_id=#{blogId}
+    </delete>
+    <select id="getByBlogId" parameterType="int" resultType="java.lang.Integer">
+        SELECT tag_id FROM blog_tag WHERE blog_id=#{value}
+    </select>
+    <select id="getByTagId" resultType="java.lang.Integer">
+        SELECT blog_id FROM blog_tag WHERE tag_id=#{value}
+    </select>
 </mapper>

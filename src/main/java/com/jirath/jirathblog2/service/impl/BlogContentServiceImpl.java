@@ -30,6 +30,12 @@ public class BlogContentServiceImpl implements BlogContentService {
     CommentDao commentDao;
     @Value("${blog-num-every-page}")
     int pageBlogNum;
+
+    @Override
+    public Blog getPsgById(int id) {
+        return blogDao.getMsgById(id);
+    }
+
     @Override
     public DefaultPageMsg getDefaultPageContent() {
         List<Blog> blogList=blogDao.getSpecificPage(new PageScope(0,pageBlogNum));

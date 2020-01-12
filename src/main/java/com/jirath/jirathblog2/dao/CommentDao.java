@@ -19,4 +19,10 @@ public interface CommentDao {
      * @param comment
      */
     void addComment(Comment comment);
+
+    /**
+     * 根据评论号删记录
+     * @param commentId
+     */
+    void deleteByComId(int commentId);
 }

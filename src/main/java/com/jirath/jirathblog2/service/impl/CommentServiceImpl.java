@@ -36,4 +36,9 @@ public class CommentServiceImpl implements CommentService {
             e.printStackTrace();
         }
     }
+
+    @Override
+    public void delComment(int commentId) {
+        commentDao.deleteByComId(commentId);
+    }
 }

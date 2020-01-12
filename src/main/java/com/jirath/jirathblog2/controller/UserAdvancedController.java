@@ -7,6 +7,8 @@ import com.jirath.jirathblog2.vo.ResultVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
@@ -31,6 +33,23 @@ public class UserAdvancedController {
     public Object addComment(Comment comment){
         try {
             commentService.comment(comment);
+            return ResultVo.builder()
+                    .code(msgValueUtil.getSuccess())
+                    .msg("comment")
+                    .build();
+        }catch (Exception e){
+            e.printStackTrace();
+            return ResultVo.builder()
+                    .code(msgValueUtil.getDefaultError())
+                    .msg("commentError")
+                    .build();
+        }
+
+    }
+    @RequestMapping("/comment/delete/{commentId}")
+    public Object addComment(@PathVariable int commentId){
+        try {
+            commentService.delComment(commentId);
             return ResultVo.builder()
                     .code(msgValueUtil.getSuccess())
                     .msg("comment")

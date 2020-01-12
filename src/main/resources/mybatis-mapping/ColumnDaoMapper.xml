@@ -5,7 +5,7 @@
         INSERT INTO "column" (column_presentation)
         VALUES (#{value})
     </insert>
-    <update id="fixMsg" parameterType="Column">
+    <update id="fixMsg" parameterType="int">
         UPDATE "column" SET column_presentation=#{columnPresentation}
         WHERE column_id=#{columnId}
     </update>
