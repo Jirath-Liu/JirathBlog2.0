@@ -9,26 +9,25 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 /**
  * @author Jirath
  */
-//@Configuration
 
 /**
  * 曾经用过的跨域配置方法，现在使用SpringBoot集成的配置文件
  */
+@Configuration
 public class CorsConfig {
     @Value("${cors.allowedHeader}")
     String allowedHeader;
-//    @Bean
-//    public WebMvcConfigurer corsConfigurer() {
-//        return new WebMvcConfigurer() {
-//            @Override
-//            public void addCorsMappings(CorsRegistry registry) {
-//                registry.addMapping("/**")
-//                        .allowedOrigins("*")
-////                        .allowCredentials(true)
-////                        .allowedHeaders("*")
-//                        .allowedMethods("*")
-//                        .maxAge(3600);
-//            }
-//        };
-//    }
+    @Bean
+    public WebMvcConfigurer corsConfigurer() {
+        return new WebMvcConfigurer() {
+            @Override
+            public void addCorsMappings(CorsRegistry registry) {
+                registry.addMapping("/**")
+                        .allowedOrigins("*")
+//                        .allowCredentials(true)
+                        .allowedMethods("*")
+                        .maxAge(3600);
+            }
+        };
+    }
 }

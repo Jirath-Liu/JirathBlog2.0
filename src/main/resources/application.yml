@@ -1,6 +1,6 @@
 spring:
   profiles:
-    active: dev
+    active: pro
 
 msg:
   success: 100
@@ -16,7 +16,6 @@ shiro-salt: jirath
 
 blog-num-every-page: 5
 
-management.endpoints.web.cors.allowed-origins: '*'
-management.endpoints.web.cors.allowed-methods: '*'
+
 cors:
   allowedHeader: GFkk6vdyDOE1TQJ4UKiPq9

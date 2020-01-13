@@ -6,7 +6,9 @@ server:
 spring:
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-
+    url:
+    username:
+    password:
 
 mybatis:
   type-aliases-package: com.jirath.jirathblog2.pojo,com.jirath.jirathblog2.query
