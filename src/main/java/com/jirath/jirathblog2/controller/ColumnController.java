@@ -3,11 +3,14 @@ package com.jirath.jirathblog2.controller;
 import com.jirath.jirathblog2.service.ColumnService;
 import com.jirath.jirathblog2.util.MsgValueUtil;
 import com.jirath.jirathblog2.vo.ResultVo;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * Can be accessed by all
@@ -15,7 +18,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
  */
 @Controller
 @RequestMapping("/column")
+@ResponseBody
 public class ColumnController {
+    private final Logger logger= LoggerFactory.getLogger(getClass());
     @Autowired
     ColumnService columnService;
     @Autowired
@@ -30,7 +35,7 @@ public class ColumnController {
                     .msg("allColumn")
                     .build();
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("异常",e);
             return ResultVo.builder()
                     .code(msgValueUtil.getDefaultError())
                     .msg("getColumnError")
@@ -52,7 +57,7 @@ public class ColumnController {
                     .msg(columnId+"content")
                     .build();
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("异常",e);
             return ResultVo.builder()
                     .code(msgValueUtil.getDefaultError())
                     .msg("getError")

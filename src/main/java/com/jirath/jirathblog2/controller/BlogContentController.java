@@ -6,6 +6,8 @@ import com.jirath.jirathblog2.util.MsgValueUtil;
 import com.jirath.jirathblog2.service.BlogContentService;
 import com.jirath.jirathblog2.vo.DefaultPageMsg;
 import com.jirath.jirathblog2.vo.ResultVo;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,7 +20,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
  */
 @Controller
 @RequestMapping("/blog")
+@ResponseBody
 public class BlogContentController {
+    private final Logger logger= LoggerFactory.getLogger(getClass());
     @Autowired
     MsgValueUtil msgValueUtil;
     @Autowired
@@ -34,7 +38,7 @@ public class BlogContentController {
                     .data(blogContentService.getPsgById(blogId))
                     .build();
         }catch (Exception e){
-            e.printStackTrace();
+            logger.error("异常",e);
             return ResultVo.builder()
                     .code(msgValueUtil.getDefaultError())
                     .msg("contentError")
@@ -54,7 +58,7 @@ public class BlogContentController {
                     .data(defaultPageMsg)
                     .build();
         }catch (Exception e){
-            e.printStackTrace();
+            logger.error("异常",e);
             return ResultVo.builder()
                     .code(msgValueUtil.getDefaultError())
                     .msg("defaultPageError")
@@ -84,7 +88,7 @@ public class BlogContentController {
                     .data(blog)
                     .build();
         }catch (Exception e){
-            e.printStackTrace();
+            logger.error("异常",e);
             return ResultVo.builder()
                     .code(msgValueUtil.getDefaultError())
                     .msg("RecommendError")
@@ -104,7 +108,7 @@ public class BlogContentController {
                     .data(blog)
                     .build();
         }catch (Exception e){
-            e.printStackTrace();
+            logger.error("异常",e);
             return ResultVo.builder()
                     .code(msgValueUtil.getDefaultError())
                     .msg("LatestError")

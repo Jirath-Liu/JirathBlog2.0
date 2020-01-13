@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
  */
 @RequestMapping("/admin")
 @Controller
+@ResponseBody
 public class AdminController {
     private final Logger logger = LoggerFactory.getLogger(getClass());
     @Autowired
@@ -57,7 +58,7 @@ public class AdminController {
                     .data(blog)
                     .build();
         }catch (Exception e){
-            e.printStackTrace();
+            logger.error("异常",e);
             return ResultVo.builder()
                     .code(msgValueUtil.getDefaultError())
                     .msg("AddError")
@@ -77,7 +78,7 @@ public class AdminController {
                     .msg("delete")
                     .build();
         }catch (Exception e){
-            e.printStackTrace();
+            logger.error("异常",e);
             return ResultVo.builder()
                     .code(msgValueUtil.getDefaultError())
                     .msg("deleteError")
@@ -100,7 +101,7 @@ public class AdminController {
                     .msg("fix")
                     .build();
         }catch (Exception e){
-            e.printStackTrace();
+            logger.error("异常",e);
             return ResultVo.builder()
                     .code(msgValueUtil.getDefaultError())
                     .msg("fixError")
@@ -116,7 +117,7 @@ public class AdminController {
                     .msg("add")
                     .build();
         }catch (Exception e){
-            e.printStackTrace();
+            logger.error("异常",e);
             return ResultVo.builder()
                     .code(msgValueUtil.getDefaultError())
                     .msg("addError")
@@ -137,7 +138,7 @@ public class AdminController {
                     .msg("addColumn")
                     .build();
         }catch (Exception e){
-            e.printStackTrace();
+            logger.error("异常",e);
             return ResultVo.builder()
                     .code(msgValueUtil.getDefaultError())
                     .msg("addError")
@@ -153,7 +154,7 @@ public class AdminController {
                     .msg("addColumn")
                     .build();
         }catch (Exception e){
-            e.printStackTrace();
+            logger.error("异常",e);
             return ResultVo.builder()
                     .code(msgValueUtil.getDefaultError())
                     .msg("addError")
@@ -169,7 +170,7 @@ public class AdminController {
                     .msg("addColumn")
                     .build();
         }catch (Exception e){
-            e.printStackTrace();
+            logger.error("异常",e);
             return ResultVo.builder()
                     .code(msgValueUtil.getDefaultError())
                     .msg("addError")
@@ -190,7 +191,7 @@ public class AdminController {
                     .msg("newTag")
                     .build();
         }catch (Exception e){
-            e.printStackTrace();
+            logger.error("异常",e);
             return ResultVo.builder()
                     .code(msgValueUtil.getDefaultError())
                     .msg("newTagError")
@@ -206,7 +207,7 @@ public class AdminController {
                     .msg("addTag")
                     .build();
         }catch (Exception e){
-            e.printStackTrace();
+            logger.error("异常",e);
             return ResultVo.builder()
                     .code(msgValueUtil.getDefaultError())
                     .msg("addError")
@@ -222,7 +223,7 @@ public class AdminController {
                     .msg("delBlogTag")
                     .build();
         }catch (Exception e){
-            e.printStackTrace();
+            logger.error("异常",e);
             return ResultVo.builder()
                     .code(msgValueUtil.getDefaultError())
                     .msg("delError")
@@ -238,7 +239,7 @@ public class AdminController {
                     .msg("delTag")
                     .build();
         }catch (Exception e){
-            e.printStackTrace();
+            logger.error("异常",e);
             return ResultVo.builder()
                     .code(msgValueUtil.getDefaultError())
                     .msg("delError")
@@ -254,7 +255,7 @@ public class AdminController {
                     .msg("fixTag")
                     .build();
         }catch (Exception e){
-            e.printStackTrace();
+            logger.error("异常",e);
             return ResultVo.builder()
                     .code(msgValueUtil.getDefaultError())
                     .msg("fixError")

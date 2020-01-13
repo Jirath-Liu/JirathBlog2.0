@@ -11,6 +11,8 @@ import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -22,8 +24,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * 基础操作，无需登录
  * @author Jirath
  */
+@ResponseBody
 @Controller
 public class UserBasicController {
+    private final Logger logger = LoggerFactory.getLogger(getClass());
     @Autowired
     UserService userService;
     @Autowired
@@ -38,11 +42,20 @@ public class UserBasicController {
         try {
             subject.login(passwordToken);
         }catch (UnknownAccountException e){
-            System.out.println("无"+account);
-            return "无账号";
+            logger.error("无账号"+account,e);
+            return ResultVo.builder()
+                    .code(msgValueUtil.getNoAccount())
+                    .msg("loginFailed")
+                    .data(subject.getPrincipal())
+                    .build();
         }catch (IncorrectCredentialsException e){
+            logger.error("密码错误",e);
             System.out.println("密码错误"+password);
-            return "密码错误";
+            return ResultVo.builder()
+                    .code(msgValueUtil.getPasswordError())
+                    .msg("loginFailed")
+                    .data(subject.getPrincipal())
+                    .build();
         }
         return ResultVo.builder()
                 .code(msgValueUtil.getSuccess())
@@ -58,6 +71,7 @@ public class UserBasicController {
             subject = SecurityUtils.getSubject();
             subject.logout();
         }catch (Exception e){
+            logger.error("注销异常",e);
             return ResultVo.builder()
                     .code(msgValueUtil.getDefaultError())
                     .msg("error")
@@ -80,6 +94,7 @@ public class UserBasicController {
                     .msg("register")
                     .build();
         }catch (ExistedAccountException e){
+            logger.error("创建账户异常",e);
             return ResultVo.builder()
                     .code(msgValueUtil.getExistAccount())
                     .msg("account existed")

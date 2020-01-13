@@ -4,12 +4,15 @@ import com.jirath.jirathblog2.pojo.Comment;
 import com.jirath.jirathblog2.service.CommentService;
 import com.jirath.jirathblog2.util.MsgValueUtil;
 import com.jirath.jirathblog2.vo.ResultVo;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * 高级用户操作，需要登录,不需要做登录检查
@@ -17,7 +20,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
  */
 @Controller
 @RequestMapping("/user")
+@ResponseBody
 public class UserAdvancedController {
+    private final Logger logger= LoggerFactory.getLogger(getClass());
     @Autowired
     MsgValueUtil msgValueUtil;
     @Autowired
@@ -38,7 +43,7 @@ public class UserAdvancedController {
                     .msg("comment")
                     .build();
         }catch (Exception e){
-            e.printStackTrace();
+            logger.error("异常",e);
             return ResultVo.builder()
                     .code(msgValueUtil.getDefaultError())
                     .msg("commentError")
@@ -55,7 +60,7 @@ public class UserAdvancedController {
                     .msg("comment")
                     .build();
         }catch (Exception e){
-            e.printStackTrace();
+            logger.error("异常",e);
             return ResultVo.builder()
                     .code(msgValueUtil.getDefaultError())
                     .msg("commentError")
