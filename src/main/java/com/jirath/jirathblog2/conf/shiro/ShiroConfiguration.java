@@ -53,7 +53,7 @@ public class ShiroConfiguration {
         Map<String, String> map = new LinkedHashMap<>();
         map.put("/user/*","authc");
         map.put("/admin/**","roles[owner]");
-        shiroFilterFactoryBean.setLoginUrl("/login");
+        shiroFilterFactoryBean.setLoginUrl("/loginAdmin.html");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(map);
         return shiroFilterFactoryBean;
     }

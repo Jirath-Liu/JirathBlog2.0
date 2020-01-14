@@ -50,12 +50,12 @@ public class AdminController {
     @ResponseBody
     public Object addPassage(Blog blog){
         try {
-            blogContentService.addPassage(blog);
+            Blog blogNew=blogContentService.addPassage(blog);
             logger.info("添加文章："+blog.toString());
             return ResultVo.builder()
                     .code(msgValueUtil.getSuccess())
                     .msg("addPassage")
-                    .data(blog)
+                    .data(blogNew)
                     .build();
         }catch (Exception e){
             logger.error("异常",e);

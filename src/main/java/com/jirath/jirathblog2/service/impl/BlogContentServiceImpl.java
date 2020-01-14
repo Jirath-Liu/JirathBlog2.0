@@ -54,8 +54,9 @@ public class BlogContentServiceImpl implements BlogContentService {
     }
 
     @Override
-    public void addPassage(Blog blog) {
+    public Blog addPassage(Blog blog) {
         blogDao.addPassage(blog);
+        return blog;
     }
 
     @Override

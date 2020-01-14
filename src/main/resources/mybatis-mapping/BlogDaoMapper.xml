@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.jirath.jirathblog2.dao.BlogDao">
-    <insert id="addPassage">
+    <insert id="addPassage" parameterType="Blog" useGeneratedKeys="true" keyProperty="blogId" keyColumn="blog_id">
         INSERT INTO blog (blog_content, blog_title, blog_author, blog_comment_quantity, blog_create_time, blog_last_fix_time)
                 VALUES (#{blogContent},#{blogTitle},#{blogAuthor},0,now(),now())
     </insert>

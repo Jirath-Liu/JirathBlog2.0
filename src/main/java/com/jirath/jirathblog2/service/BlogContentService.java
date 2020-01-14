@@ -32,7 +32,7 @@ public interface BlogContentService {
      * 添加文章
      * @param blog 文章信息
      */
-    void addPassage(Blog blog);
+    Blog addPassage(Blog blog);
 
     /**
      * 查找最新的文章

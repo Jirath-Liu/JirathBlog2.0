@@ -23,8 +23,8 @@ public class CorsConfig {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
-                        .allowedOrigins("*")
-//                        .allowCredentials(true)
+                        .allowedOrigins("http://localhost:63343")
+                        .allowCredentials(true)
                         .allowedMethods("*")
                         .maxAge(3600);
             }
