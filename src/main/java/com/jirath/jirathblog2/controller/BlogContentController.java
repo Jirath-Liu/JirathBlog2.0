@@ -5,6 +5,7 @@ import com.jirath.jirathblog2.service.ColumnService;
 import com.jirath.jirathblog2.util.MsgValueUtil;
 import com.jirath.jirathblog2.service.BlogContentService;
 import com.jirath.jirathblog2.vo.DefaultPageMsg;
+import com.jirath.jirathblog2.vo.PageMsg;
 import com.jirath.jirathblog2.vo.ResultVo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -70,7 +71,21 @@ public class BlogContentController {
     @ResponseBody
     @RequestMapping("/page/{pageId}")
     public Object getSpecificPage(@PathVariable int pageId){
-        return blogContentService.getSpecificPage(pageId);
+        try {
+            PageMsg pageMsg= blogContentService.getSpecificPage(pageId);
+            return ResultVo.builder()
+                    .code(msgValueUtil.getSuccess())
+                    .msg("SpecificPage")
+                    .data(pageMsg)
+                    .build();
+        }catch (Exception e){
+            logger.error("异常",e);
+            return ResultVo.builder()
+                    .code(msgValueUtil.getDefaultError())
+                    .msg("getSpecificPageError")
+                    .data(null)
+                    .build();
+        }
     }
 
     /**

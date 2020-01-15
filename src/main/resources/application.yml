@@ -19,3 +19,4 @@ blog-num-every-page: 5
 
 cors:
   allowedHeader: GFkk6vdyDOE1TQJ4UKiPq9
+  allowedOrigins: http://127.0.0.1:5500

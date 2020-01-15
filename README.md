@@ -32,7 +32,7 @@
     }
 ````
 Mapping 为开放的接口
-Origins为对应的前端请求源地址
+Origins为对应的前端请求源地址,在配置文件中修改
 Credentials开启：ajaxPOST提交需要将SessionId附加在cookie中
 Methods:允许的方式
 maxAge:最大连接时间

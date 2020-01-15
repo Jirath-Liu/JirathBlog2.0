@@ -2,6 +2,7 @@ package com.jirath.jirathblog2.service;
 
 import com.jirath.jirathblog2.pojo.Blog;
 import com.jirath.jirathblog2.vo.DefaultPageMsg;
+import com.jirath.jirathblog2.vo.PageMsg;
 
 import java.util.List;
 
@@ -26,7 +27,7 @@ public interface BlogContentService {
      * @param page 页数
      * @return 博客内容
      */
-    List<Blog> getSpecificPage(int page);
+    PageMsg getSpecificPage(int page);
 
     /**
      * 添加文章

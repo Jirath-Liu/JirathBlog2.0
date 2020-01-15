@@ -8,6 +8,7 @@ import com.jirath.jirathblog2.pojo.Blog;
 import com.jirath.jirathblog2.query.PageScope;
 import com.jirath.jirathblog2.service.BlogContentService;
 import com.jirath.jirathblog2.vo.DefaultPageMsg;
+import com.jirath.jirathblog2.vo.PageMsg;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,8 +50,14 @@ public class BlogContentServiceImpl implements BlogContentService {
     }
 
     @Override
-    public List<Blog> getSpecificPage(int page) {
-        return blogDao.getSpecificPage(new PageScope((page-1)*pageBlogNum,pageBlogNum));
+    public PageMsg getSpecificPage(int page) {
+        int blogNum=blogDao.getBlogNum();
+        int pageNum = (blogNum % pageBlogNum == 0) ? (blogNum / pageBlogNum) : (blogNum / pageBlogNum + 1);
+        return PageMsg.builder()
+                .blogList(blogDao.getSpecificPage(new PageScope((page-1)*pageBlogNum,pageBlogNum)))
+                .onPage(page)
+                .pageNum(pageNum)
+                .build();
     }
 
     @Override

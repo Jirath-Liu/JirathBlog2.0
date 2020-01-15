@@ -17,13 +17,15 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class CorsConfig {
     @Value("${cors.allowedHeader}")
     String allowedHeader;
+    @Value("${cors.allowedOrigins}")
+    String allowedOrigins;
     @Bean
     public WebMvcConfigurer corsConfigurer() {
         return new WebMvcConfigurer() {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
-                        .allowedOrigins("http://localhost:63343")
+                        .allowedOrigins(allowedOrigins)
                         .allowCredentials(true)
                         .allowedMethods("*")
                         .maxAge(3600);
