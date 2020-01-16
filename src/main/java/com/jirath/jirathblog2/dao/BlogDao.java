@@ -7,7 +7,9 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 /**
+ * blog表对应操作，最新更新：文章输出排序ORDER BY blog_id desc
  * @author Jirath
+ * @since 2020年1月16日11:31:51
  */
 @Repository
 public interface BlogDao {

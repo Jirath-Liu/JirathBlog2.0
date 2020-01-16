@@ -11,6 +11,6 @@
         SELECT * FROM blog_column
     </select>
     <select id="getMsgByColumn" resultType="integer">
-        SELECT blog_id FROM blog_column WHERE column_id=#{value}
+        SELECT blog_id FROM blog_column WHERE column_id=#{value} ORDER BY blog_id desc
     </select>
 </mapper>

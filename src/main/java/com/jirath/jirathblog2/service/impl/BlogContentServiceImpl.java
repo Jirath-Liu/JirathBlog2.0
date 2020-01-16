@@ -9,8 +9,6 @@ import com.jirath.jirathblog2.query.PageScope;
 import com.jirath.jirathblog2.service.BlogContentService;
 import com.jirath.jirathblog2.vo.DefaultPageMsg;
 import com.jirath.jirathblog2.vo.PageMsg;
-import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -86,6 +84,6 @@ public class BlogContentServiceImpl implements BlogContentService {
 
     @Override
     public void fix(Blog blog) {
-
+        blogDao.fixBlog(blog);
     }
 }

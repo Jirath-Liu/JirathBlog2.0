@@ -20,7 +20,7 @@
         DELETE FROM blog WHERE blog_id IN (SELECT blog_id FROM blog_column WHERE column_id=#{value})
     </delete>
     <select id="getSpecificPage" resultType="com.jirath.jirathblog2.pojo.Blog" parameterType="PageScope">
-        SELECT * FROM blog LIMIT #{skipNum},#{requireNum}
+        SELECT * FROM blog ORDER BY blog_id desc LIMIT #{skipNum},#{requireNum}
     </select>
     <select id="getBlogNum" resultType="java.lang.Integer">
         SELECT COUNT(*) FROM blog
