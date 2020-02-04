@@ -10,6 +10,10 @@ spring:
     username: root
     password: root
 
+cors:
+  allowedHeader: GFkk6vdyDOE1TQJ4UKiPq9
+  allowedOrigins: http://localhost
+
 mybatis:
   type-aliases-package: com.jirath.jirathblog2.pojo,com.jirath.jirathblog2.query
   mapper-locations: classpath:mybatis-mapping/*Mapper.xml

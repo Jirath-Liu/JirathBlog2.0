@@ -6,9 +6,12 @@ server:
 spring:
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url:
-    username:
-    password:
+
+
+cors:
+  allowedHeader: GFkk6vdyDOE1TQJ4UKiPq9
+  allowedOrigins: http://jirath.cn
+
 
 mybatis:
   type-aliases-package: com.jirath.jirathblog2.pojo,com.jirath.jirathblog2.query
@@ -19,5 +22,4 @@ logging:
   file:
     path: /spring/log
     name: jirathBlog2.log
-
 

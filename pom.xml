@@ -10,7 +10,7 @@
     </parent>
     <groupId>com.jiarth</groupId>
     <artifactId>jirath_blog2</artifactId>
-    <version>0.0.6-release</version>
+    <version>0.1.5-release</version>
     <name>jirath_blog2</name>
     <description>2代个人博客系统</description>
 

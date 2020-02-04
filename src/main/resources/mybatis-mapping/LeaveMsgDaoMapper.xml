@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jirath.jirathblog2.dao.LeaveMsgDao">
+    <insert id="addMsg" parameterType="string">
+        INSERT INTO leave_msg (leave_msg) values (#{msg})
+    </insert>
+    <delete id="deleMsg" parameterType="int">
+        DELETE FROM leave_msg WHERE leave_msg_id=#{id};
+    </delete>
+    <select id="getAll" resultType="LeaveMsg">
+        SELECT * FROM leave_msg
+    </select>
+
+</mapper>
