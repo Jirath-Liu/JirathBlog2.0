@@ -4,6 +4,7 @@ import com.jirath.jirathblog2.dao.LeaveMsgDao;
 import com.jirath.jirathblog2.pojo.LeaveMsg;
 import com.jirath.jirathblog2.util.MsgValueUtil;
 import com.jirath.jirathblog2.vo.ResultVo;
+import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -26,6 +27,7 @@ public class LeaveMsgController {
                 .msg("add msg "+msg)
                 .build();
     }
+    @RequiresRoles("owner")
     @RequestMapping("/del")
     public ResultVo delMsg(int id) {
         leaveMsgDao.deleMsg(id);
