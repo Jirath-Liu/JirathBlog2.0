@@ -28,5 +28,5 @@ public interface UserIdentityDao {
      * @param userIdentity 用户身份对象
      * @return 已存在返回0
      */
-    int insertUserIdentity(UserIdentity userIdentity);
+    Integer insertUserIdentity(UserIdentity userIdentity);
 }

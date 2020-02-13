@@ -20,6 +20,6 @@ public interface UserDao {
      * @param user pojo对象
      * @return 已存在则返回0成功为1
      */
-    int insertUser(User user);
+    Integer insertUser(User user);
 
 }

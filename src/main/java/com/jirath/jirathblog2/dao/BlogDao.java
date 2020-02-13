@@ -35,14 +35,14 @@ public interface BlogDao {
      * 获取博客数目
      * @return 文章数目
      */
-    int getBlogNum();
+    Integer getBlogNum();
 
     /**
      * 添加文章，并返回文章号
      * @param blog 文章的内容，文章的日期，评论数量会在dao层自动的利用mysql函数完成
      * @return 新建的文章号
      */
-    int addPassage(Blog blog);
+    Integer addPassage(Blog blog);
 
     /**
      * 获取最新记录
@@ -74,14 +74,14 @@ public interface BlogDao {
      * @param blogId
      * @return
      */
-    int getCommentNum(int blogId);
+    Integer getCommentNum(int blogId);
 
     /**
      * 增加评论数
      * @param blogId
      * @return
      */
-    int fixCommentNum(int blogId);
+    Integer fixCommentNum(int blogId);
 
     /**
      * 由id获取文章信息
