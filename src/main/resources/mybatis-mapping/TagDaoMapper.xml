@@ -18,4 +18,10 @@
         SELECT * FROM  tag WHERE tag_id=#{value}
     </select>
 
+    <select id="selectListByIds" parameterType="integer" resultType="Tag">
+        SELECT * FROM tag WHERE tag_id IN
+        <foreach collection="ids" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
 </mapper>

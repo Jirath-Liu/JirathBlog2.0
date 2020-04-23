@@ -1,81 +1,87 @@
 package com.jirath.jirathblog2.controller;
 
-import com.jirath.jirathblog2.service.ColumnService;
+import com.jirath.jirathblog2.pojo.BlogTag;
+import com.jirath.jirathblog2.pojo.Tag;
+import com.jirath.jirathblog2.service.TagService;
 import com.jirath.jirathblog2.util.MsgValueUtil;
 import com.jirath.jirathblog2.vo.ResultVo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
- * Can be accessed by all
  * @author Jirath
+ * @date 2020/4/23
+ * @description:
  */
-@Controller
-@RequestMapping("/column")
-@ResponseBody
-public class ColumnController {
-    private final Logger logger= LoggerFactory.getLogger(getClass());
+@RestController("/tag")
+public class TagController {
+    private final Logger logger = LoggerFactory.getLogger(getClass());
     @Autowired
-    ColumnService columnService;
+    TagService tagService;
     @Autowired
     MsgValueUtil msgValueUtil;
 
     @RequestMapping("/all")
-    public Object getAllColumn() {
+    public Object getAllTag(){
         try {
-            columnService.getAllColumn();
             return ResultVo.builder()
+                    .data(tagService.getAll())
                     .code(msgValueUtil.getSuccess())
-                    .msg("allColumn")
+                    .msg("allTag")
                     .build();
-        } catch (Exception e) {
+        }catch (Exception e){
             logger.error("异常",e);
             return ResultVo.builder()
                     .code(msgValueUtil.getDefaultError())
-                    .msg("getColumnError")
+                    .msg("newTagError")
                     .build();
         }
     }
 
-    /**
-     * 获取指定分类的博文内容
-     * @param columnId 分类号
-     * @return 内容，包含博客的完整信息
-     */
-    @RequestMapping("/{columnId}")
-    public Object getSpecificColumn(@PathVariable int columnId){
+    @RequestMapping("/search/{blogId}")
+    public Object getBlogTag(@PathVariable Integer blogId){
         try {
             return ResultVo.builder()
+                    .data(tagService.getByBlogId(blogId))
                     .code(msgValueUtil.getSuccess())
-                    .data(columnService.getColumnPsg(columnId))
-                    .msg(columnId+"content")
+                    .msg("allTag")
                     .build();
-        } catch (Exception e) {
+        }catch (Exception e){
             logger.error("异常",e);
             return ResultVo.builder()
                     .code(msgValueUtil.getDefaultError())
-                    .msg("getError")
+                    .msg("newTagError")
                     .build();
         }
     }
-    /**
-     * ======================================================================================
-     *                          管理
-     * ======================================================================================
-     */
-    @RequestMapping("/blog/column/add/{blogId}/{columnId}")
-    public Object addPsgToColumn(@PathVariable int blogId,@PathVariable int columnId){
+
+    @RequestMapping("/tag/add")
+    public Object addTag(Tag tag){
         try {
-            columnService.addPsgToColumn(blogId,columnId);
+            tagService.addTag(tag);
             return ResultVo.builder()
                     .code(msgValueUtil.getSuccess())
-                    .msg("add")
+                    .msg("newTag")
+                    .build();
+        }catch (Exception e){
+            logger.error("异常",e);
+            return ResultVo.builder()
+                    .code(msgValueUtil.getDefaultError())
+                    .msg("newTagError")
+                    .build();
+        }
+    }
+    @RequestMapping("/blog/tag")
+    public Object addPsgToTag(BlogTag blogTag){
+        try {
+            tagService.addPsgToTag(blogTag);
+            return ResultVo.builder()
+                    .code(msgValueUtil.getSuccess())
+                    .msg("addTag")
                     .build();
         }catch (Exception e){
             logger.error("异常",e);
@@ -85,51 +91,51 @@ public class ColumnController {
                     .build();
         }
     }
-    @RequestMapping("/delete/{columnId}")
-    public Object deleteColumn(@PathVariable int columnId){
+    @RequestMapping("/blog/delTag")
+    public Object delPsgInTag(BlogTag blogTag){
         try {
-            columnService.deleteColumnById(columnId);
+            tagService.delBlogInTag(blogTag);
             return ResultVo.builder()
                     .code(msgValueUtil.getSuccess())
-                    .msg("addColumn")
+                    .msg("delBlogTag")
                     .build();
         }catch (Exception e){
             logger.error("异常",e);
             return ResultVo.builder()
                     .code(msgValueUtil.getDefaultError())
-                    .msg("addError")
+                    .msg("delError")
                     .build();
         }
     }
-    @RequestMapping("/add")
-    public Object addColumn(@PathVariable String presentation){
+    @RequestMapping("/tag/delete/{tagId}")
+    public Object delTag(@PathVariable int tagId){
         try {
-            columnService.addColumn(presentation);
+            tagService.delTag(tagId);
             return ResultVo.builder()
                     .code(msgValueUtil.getSuccess())
-                    .msg("addColumn")
+                    .msg("delTag")
                     .build();
         }catch (Exception e){
             logger.error("异常",e);
             return ResultVo.builder()
                     .code(msgValueUtil.getDefaultError())
-                    .msg("addError")
+                    .msg("delError")
                     .build();
         }
     }
-    @RequestMapping("/fix/{columnId}/{name}")
-    public Object fixColumn(@PathVariable int columnId,@PathVariable String name){
+    @RequestMapping("/tag/fix")
+    public Object fixTag(Tag tag){
         try {
-            columnService.fixColumnMsg(columnId,name);
+            tagService.fixTag(tag);
             return ResultVo.builder()
                     .code(msgValueUtil.getSuccess())
-                    .msg("addColumn")
+                    .msg("fixTag")
                     .build();
         }catch (Exception e){
             logger.error("异常",e);
             return ResultVo.builder()
                     .code(msgValueUtil.getDefaultError())
-                    .msg("addError")
+                    .msg("fixError")
                     .build();
         }
     }

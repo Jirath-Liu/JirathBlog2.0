@@ -36,4 +36,12 @@ public interface TagService {
      * @param blogTag
      */
     void delBlogInTag(BlogTag blogTag);
+
+    /**
+     * 所有标签
+     * @return
+     */
+    Object getAll();
+
+    Object getByBlogId(Integer blogId);
 }

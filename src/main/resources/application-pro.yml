@@ -6,7 +6,9 @@ server:
 spring:
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-
+    url: jdbc:mysql://123.57.16.225:3306/jirath_blog_2?useUnicode=true&characterEncoding=utf-8
+    username: jirath_blog_2
+    password: jirath
 
 cors:
   allowedHeader: GFkk6vdyDOE1TQJ4UKiPq9

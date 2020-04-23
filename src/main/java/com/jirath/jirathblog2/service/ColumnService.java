@@ -46,4 +46,5 @@ public interface ColumnService {
      * @param columnId 分类号
      */
     void addPsgToColumn(int psgId,int columnId);
+
 }

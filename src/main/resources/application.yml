@@ -13,6 +13,7 @@ msg:
   noPower: 202
   noAccount: 301
   passwordError: 302
+
   existAccount: 303
   defaultError: 700
 

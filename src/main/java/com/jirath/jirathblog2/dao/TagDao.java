@@ -40,4 +40,6 @@ public interface TagDao {
      * @return
      */
     Tag getMsgById(int tagId);
+
+    List<Tag> selectListByIds(List<Integer> ids);
 }

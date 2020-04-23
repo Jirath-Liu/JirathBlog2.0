@@ -8,6 +8,8 @@ import com.jirath.jirathblog2.service.TagService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 /**
  * @author Jirath
  */
@@ -41,5 +43,19 @@ public class TagServiceImpl implements TagService {
     @Override
     public void delBlogInTag(BlogTag blogTag) {
         blogTagDao.delSpecificRecord(blogTag);
+    }
+
+    @Override
+    public Object getAll() {
+        return tagDao.allTag();
+    }
+
+    @Override
+    public Object getByBlogId(Integer blogId) {
+        List<Integer> ids= blogTagDao.getByBlogId(blogId);
+        if (blogId!=null) {
+            return tagDao.selectListByIds(ids);
+        }
+        return null;
     }
 }
