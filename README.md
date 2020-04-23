@@ -1,6 +1,7 @@
 # JirathBlog2.0
+this project is a rebuilded one of blog system,use Spring Boot ,Shiro, a project for the one who finish learning SpringBoot and hope to use it to do something.
 本项目是博客的重新构造，计划使用到前端的框架，后端的消息队列，安全框架Shiro，完成一个稳定运行的个人博客项目。
-# 特别说明：私用的朋友还请通知本人同意，谢谢合作
+刚刚学完SpringBoot希望找一个入门项目的，可以来参考这个项目，觉得海星麻烦点个star。
 
 ## 开始使用
 
