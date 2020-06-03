@@ -9,13 +9,14 @@ import com.jirath.jirathblog2.pojo.Column;
 import com.jirath.jirathblog2.service.ColumnService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 /**
  * @author Jirath
  */
-@Repository
+@Service
 public class ColumnServiceImpl implements ColumnService {
     @Autowired
     BlogDao blogDao;

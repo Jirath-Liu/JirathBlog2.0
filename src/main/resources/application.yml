@@ -6,7 +6,22 @@ spring:
       charset: UTF-8
       force: true
       enabled: true
-
+  redis:
+    host: 123.57.16.225
+    password: jirath
+    timeout: 60
+    database: 0
+    lettuce:
+      pool:
+        max-active: 8
+        max-wait: -1
+        max-idle: 8
+        min-idle: 0
+  cache:
+    cache-names:
+      - blogsys
+    redis:
+      time-to-live: 21600000
 msg:
   success: 100
   unLogin: 201

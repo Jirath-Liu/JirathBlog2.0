@@ -9,4 +9,6 @@ import lombok.Data;
 public class LeaveMsg {
     int leaveMsgId;
     String leaveMsg;
+    String mail;
+    String name;
 }

@@ -29,9 +29,9 @@ public class ColumnController {
     @RequestMapping("/all")
     public Object getAllColumn() {
         try {
-            columnService.getAllColumn();
             return ResultVo.builder()
                     .code(msgValueUtil.getSuccess())
+                    .data(columnService.getAllColumn())
                     .msg("allColumn")
                     .build();
         } catch (Exception e) {

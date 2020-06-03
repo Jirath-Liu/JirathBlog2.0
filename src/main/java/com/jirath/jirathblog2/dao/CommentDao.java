@@ -3,11 +3,19 @@ package com.jirath.jirathblog2.dao;
 import com.jirath.jirathblog2.pojo.Comment;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 /**
  * @author Jirath
  */
 @Repository
 public interface CommentDao {
+    /**
+     * 查博客评论
+     * @param blogId
+     * @return
+     */
+    List<Comment> selectBlogCommentList(Integer blogId);
     /**
      * 根据文章Id删除记录
      * @param blogId

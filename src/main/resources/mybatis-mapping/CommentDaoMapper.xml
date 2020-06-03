@@ -2,8 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.jirath.jirathblog2.dao.CommentDao">
     <insert id="addComment" parameterType="Comment">
-        INSERT INTO comment (blog_id, comment_order, comment_content, comment_author_id, comment_time)
-        VALUES (#{blogId},#{commentOrder},#{commentContent},#{commentAuthorId},now())
+        INSERT INTO comment (blog_id, comment_order, comment_content, comment_mail,comment_name, comment_time)
+        VALUES (#{blogId},#{commentOrder},#{commentContent},,#{commentMail},#{commentName},now())
     </insert>
     <delete id="deleteByBlogId" parameterType="int">
         DELETE FROM comment WHERE blog_id=#{value}
@@ -11,4 +11,7 @@
     <delete id="deleteByComId">
         DELETE FROM comment WHERE comment_id=#{value}
     </delete>
+    <select id="selectBlogCommentList" resultType="com.jirath.jirathblog2.pojo.Comment">
+        SELECT * FROM comment WHERE blog_id=#{value} ORDER BY comment_order DESC
+    </select>
 </mapper>

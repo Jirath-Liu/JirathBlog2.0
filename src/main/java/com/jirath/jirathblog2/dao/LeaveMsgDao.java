@@ -14,7 +14,7 @@ public interface LeaveMsgDao {
      * @param msg 内容
      * 增加信息
      */
-    void addMsg(String msg);
+    void addMsg(LeaveMsg msg);
 
     /**
      * @param id 留言号

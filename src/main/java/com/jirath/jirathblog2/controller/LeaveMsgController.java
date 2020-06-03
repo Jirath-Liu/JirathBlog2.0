@@ -6,6 +6,7 @@ import com.jirath.jirathblog2.util.MsgValueUtil;
 import com.jirath.jirathblog2.vo.ResultVo;
 import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -20,7 +21,7 @@ public class LeaveMsgController {
     @Autowired
     LeaveMsgDao leaveMsgDao;
     @RequestMapping("/add")
-    public ResultVo addMsg(String msg) {
+    public ResultVo addMsg(@RequestBody LeaveMsg msg) {
         leaveMsgDao.addMsg(msg);
         return ResultVo.builder()
                 .code(msgValueUtil.getSuccess())
