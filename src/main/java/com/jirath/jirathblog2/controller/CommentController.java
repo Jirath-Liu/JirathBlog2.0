@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
  */
 @Controller
 @ResponseBody
+@RequestMapping("/comment")
 public class CommentController {
     private final Logger logger= LoggerFactory.getLogger(getClass());
     @Autowired
@@ -54,7 +55,7 @@ public class CommentController {
      * @param commentId
      * @return
      */
-    @RequestMapping("/comment/delete/")
+    @RequestMapping("/delete/")
     public Object addComment(@PathVariable int commentId){
         try {
             Boolean canDel= commentService.commentCanDel(commentId);
