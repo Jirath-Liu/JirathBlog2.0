@@ -19,12 +19,11 @@ import org.springframework.web.bind.annotation.*;
 
 /**
  * 基础操作，无需登录
- * 已经废弃的接口,不再允许新建用户，但两个表仍在使用
+ * 只能登录管理员,不再允许新建用户
  * @author Jirath
  */
-//@ResponseBody
-//@Controller
-    @Deprecated
+@ResponseBody
+@Controller
 public class UserBasicController {
     private final Logger logger = LoggerFactory.getLogger(getClass());
     @Autowired
@@ -83,8 +82,8 @@ public class UserBasicController {
                 .data("success")
                 .build();
     }
-    @ResponseBody
-    @RequestMapping("/newAccount")
+    //@ResponseBody
+    //@RequestMapping("/newAccount")
     public Object newAccount(User user){
         try {
             userService.insertUser(user);

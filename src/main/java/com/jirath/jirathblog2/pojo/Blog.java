@@ -15,4 +15,5 @@ public class Blog {
   private int blogCommentQuantity;
   private java.util.Date blogCreateTime;
   private java.util.Date blogLastFixTime;
+  private Integer visitedTime;
 }

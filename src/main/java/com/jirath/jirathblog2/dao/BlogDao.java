@@ -84,6 +84,11 @@ public interface BlogDao {
     Integer fixCommentNum(int blogId);
 
     /**
+     * 增加访问次数
+     * @param blogId
+     */
+    void fixVisitNum(int blogId);
+    /**
      * 由id获取文章信息
      * @param id 文章id号
      * @return 文章信息

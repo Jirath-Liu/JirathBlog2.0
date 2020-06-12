@@ -8,6 +8,9 @@
     <update id="fixCommentNum" parameterType="int">
         UPDATE blog SET blog_comment_quantity=blog_comment_quantity+1 WHERE blog_id=#{value}
     </update>
+    <update id="fixVisitNum" parameterType="int">
+        UPDATE blog SET visit_time=visit_time+1 WHERE blog_id=#{value}
+    </update>
     <update id="fixBlog" parameterType="Blog">
         UPDATE blog SET blog_content=#{blogContent} , blog_title=#{blogTitle},
          blog_author=#{blogAuthor}, blog_last_fix_time=now()

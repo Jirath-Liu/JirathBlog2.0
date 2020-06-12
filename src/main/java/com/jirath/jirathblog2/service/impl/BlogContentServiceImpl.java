@@ -32,6 +32,7 @@ public class BlogContentServiceImpl implements BlogContentService {
 
     @Override
     public Blog getPsgById(int id) {
+        blogDao.fixVisitNum(id);
         return blogDao.getMsgById(id);
     }
 
