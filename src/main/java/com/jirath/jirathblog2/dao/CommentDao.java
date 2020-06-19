@@ -1,6 +1,7 @@
 package com.jirath.jirathblog2.dao;
 
 import com.jirath.jirathblog2.pojo.Comment;
+import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -33,4 +34,11 @@ public interface CommentDao {
      * @param commentId
      */
     void deleteByComId(int commentId);
+
+    @Select("SELECT comment_mail FROM comment WHERE comment_id ={value}")
+    String selectMailById(int commentId);
+
+    void deleteBycomIdList(List<Integer> comments);
+
+    void deleteByBlogIdList(List<Integer> ids);
 }

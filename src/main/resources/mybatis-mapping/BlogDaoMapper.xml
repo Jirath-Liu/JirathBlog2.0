@@ -16,11 +16,22 @@
          blog_author=#{blogAuthor}, blog_last_fix_time=now()
         WHERE blog_id=#{blogId}
     </update>
-    <delete id="deleteBlogById">
+    <update id="fixBlogAT" parameterType="Blog">
+        UPDATE blog SET blog_title=#{blogTitle},
+         blog_author=#{blogAuthor}, blog_last_fix_time=now()
+        WHERE blog_id=#{blogId}
+    </update>
+    <delete id="deleteBlogById" parameterType="integer">
         DELETE FROM blog WHERE blog_id=#{value}
     </delete>
     <delete id="deleteByColumn" parameterType="int">
         DELETE FROM blog WHERE blog_id IN (SELECT blog_id FROM blog_column WHERE column_id=#{value})
+    </delete>
+    <delete id="deleteBlogByIdList" parameterType="list" >
+        DELETE DELETE FROM blog WHERE blog_id IN
+        <foreach collection="list" item="id" open="(" close=")" separator=",">
+            {id}
+        </foreach>
     </delete>
     <select id="getSpecificPage" resultType="com.jirath.jirathblog2.pojo.Blog" parameterType="PageScope">
         SELECT * FROM blog ORDER BY blog_id desc LIMIT #{skipNum},#{requireNum}

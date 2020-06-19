@@ -33,5 +33,6 @@ public interface BlogColumnDao {
      * @param blogColumn pojo
      */
     void addPsgToColumn(BlogColumn blogColumn);
-    
+
+    void deleteByBlogIdList(List<Integer> ids);
 }

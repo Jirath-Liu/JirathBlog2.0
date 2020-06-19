@@ -13,6 +13,12 @@
     <delete id="delSpecificRecord" parameterType="BlogTag">
         DELETE FROM blog_tag WHERE tag_id=#{tagId} AND blog_id=#{blogId}
     </delete>
+    <delete id="deleteByBlogIdList">
+        DELETE FROM blog_tag WHERE blog_id IN
+        <foreach collection="list" item="item" open="(" separator="," close=")">
+            {item}
+        </foreach>
+    </delete>
     <select id="getByBlogId" parameterType="int" resultType="java.lang.Integer">
         SELECT tag_id FROM blog_tag WHERE blog_id=#{value}
     </select>

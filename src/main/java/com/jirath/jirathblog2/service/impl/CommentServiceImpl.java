@@ -4,8 +4,6 @@ import com.jirath.jirathblog2.dao.BlogDao;
 import com.jirath.jirathblog2.dao.CommentDao;
 import com.jirath.jirathblog2.pojo.Comment;
 import com.jirath.jirathblog2.service.CommentService;
-import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
@@ -38,17 +36,26 @@ public class CommentServiceImpl implements CommentService {
         Assert.notNull(comment.getCommentMail(),"邮箱不能为空");
         Assert.notNull(comment.getCommentName(),"姓名不能为空");
         blogDao.fixCommentNum(comment.getBlogId());
+        //commentId与实际评论数量相差1，不需要再加一
         comment.setCommentOrder(blogDao.getCommentNum(comment.getBlogId()));
         commentDao.addComment(comment);
     }
 
     @Override
-    public void delComment(int commentId) {
+    public void delComment(int commentId,String mail) {
+        String ma=commentDao.selectMailById(commentId);
+        Assert.notNull(ma,"不存在该评论");
+        Assert.isTrue(!mail.equals(ma),"评论邮箱错误");
         commentDao.deleteByComId(commentId);
     }
 
+    /**
+     * 需要核查
+     * @param comments
+     */
     @Override
-    public Boolean commentCanDel(int commentId) {
-        return false;
+    public void delCommentList(List<Integer> comments){
+        commentDao.deleteBycomIdList(comments);
     }
+
 }

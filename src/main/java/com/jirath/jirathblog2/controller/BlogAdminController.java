@@ -13,10 +13,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * 博客管理相关，需要权限
@@ -59,9 +58,9 @@ public class BlogAdminController {
 
     }
 
-    @Transactional
-    @RequestMapping("/blog/delete/{blogId}")
-    public Object deleteBlog(@PathVariable int blogId) {
+    @Transactional(rollbackFor = Exception.class)
+    @RequestMapping(value = "/blog/delete/{blogId}",method = RequestMethod.DELETE)
+    public ResultVo deleteBlog(@PathVariable int blogId) {
         try {
             blogContentService.delete(blogId);
             return ResultVo.builder()
@@ -77,7 +76,23 @@ public class BlogAdminController {
         }
 
     }
-
+    @Transactional
+    @RequestMapping(value = "blog/deleteList",method = RequestMethod.POST)
+    public ResultVo delBlogList(List<Integer> ids){
+        try {
+            blogContentService.delete(ids);
+            return ResultVo.builder()
+                    .code(msgValueUtil.getSuccess())
+                    .msg("delete")
+                    .build();
+        }catch (Exception e){
+            logger.error("异常",e);
+            return ResultVo.builder()
+                    .code(msgValueUtil.getDefaultError())
+                    .msg("deleteError")
+                    .build();
+        }
+    }
     /**
      * 只可修改标题，作者，内容
      * @param blog
@@ -87,6 +102,28 @@ public class BlogAdminController {
     public Object fixBlog(Blog blog){
         try {
             blogContentService.fix(blog);
+            return ResultVo.builder()
+                    .code(msgValueUtil.getSuccess())
+                    .msg("fix")
+                    .build();
+        }catch (Exception e){
+            logger.error("异常",e);
+            return ResultVo.builder()
+                    .code(msgValueUtil.getDefaultError())
+                    .msg("fixError")
+                    .build();
+        }
+    }
+
+    /**
+     * 修改作者和标题
+     * @param title
+     * @return
+     */
+    @RequestMapping("/blog/fixat")
+    public Object fixBlogAT(@RequestParam Integer id,@RequestParam String title,@RequestParam String author){
+        try {
+            blogContentService.fixAT(id,title,author);
             return ResultVo.builder()
                     .code(msgValueUtil.getSuccess())
                     .msg("fix")

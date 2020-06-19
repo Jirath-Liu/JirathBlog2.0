@@ -16,6 +16,7 @@ public interface BlogTagDao {
      */
     void deleteByBlogId(int blogId);
 
+    void deleteByBlogIdList(List<Integer> ids);
     /**
      * 根据文章id获取信息
      * @param blogId

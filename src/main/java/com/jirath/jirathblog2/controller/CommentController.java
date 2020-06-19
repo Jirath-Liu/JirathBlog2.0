@@ -3,6 +3,7 @@ package com.jirath.jirathblog2.controller;
 import com.jirath.jirathblog2.pojo.Comment;
 import com.jirath.jirathblog2.service.CommentService;
 import com.jirath.jirathblog2.util.MsgValueUtil;
+import com.jirath.jirathblog2.vo.CommentToDel;
 import com.jirath.jirathblog2.vo.ResultVo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -51,23 +52,15 @@ public class CommentController {
     }
 
     /**
-     * // TODO: 2020/6/3 接口删除还没有完善，需要完善 
-     * @param commentId
+     * @param comment
      * @return
      */
     @RequestMapping("/delete/")
-    public Object addComment(@PathVariable int commentId){
+    public ResultVo addComment(@RequestBody CommentToDel comment){
         try {
-            Boolean canDel= commentService.commentCanDel(commentId);
-            if(canDel){
-                commentService.delComment(commentId);
-                return ResultVo.builder()
-                        .code(msgValueUtil.getSuccess())
-                        .msg("del comment")
-                        .build();
-            }
+            commentService.delComment(comment.getCommentId(),comment.getMail());
             return ResultVo.builder()
-                    .code(msgValueUtil.getNoPower())
+                    .code(msgValueUtil.getSuccess())
                     .msg("del comment")
                     .build();
         }catch (Exception e){

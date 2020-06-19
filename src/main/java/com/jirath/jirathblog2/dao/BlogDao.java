@@ -94,4 +94,8 @@ public interface BlogDao {
      * @return 文章信息
      */
     Blog getMsgById(int id);
+
+    void deleteBlogByIdList(List<Integer> ids);
+
+    void fixBlogAT(Blog blog);
 }

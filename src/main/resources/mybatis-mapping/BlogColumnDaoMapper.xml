@@ -7,6 +7,12 @@
     <delete id="deleteByBlogId" parameterType="int">
         DELETE FROM blog_column WHERE blog_id=#{value}
     </delete>
+    <delete id="deleteByBlogIdList">
+        DELETE FROM blog_column WHERE blog_id IN
+        <foreach collection="list" open="(" separator="," close=")" item="id">
+            {id}
+        </foreach>
+    </delete>
     <select id="getAll" resultType="com.jirath.jirathblog2.pojo.BlogColumn">
         SELECT * FROM blog_column
     </select>

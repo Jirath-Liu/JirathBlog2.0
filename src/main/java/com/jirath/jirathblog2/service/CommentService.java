@@ -27,12 +27,7 @@ public interface CommentService {
      * 删评论
      * @param commentId 评论号
      */
-    void delComment(int commentId);
+    void delComment(int commentId,String mail);
 
-    /**
-     * 查看是否可以删除该评论
-     * @param commentId
-     * @return
-     */
-    Boolean commentCanDel(int commentId);
+    void delCommentList(List<Integer> ids);
 }

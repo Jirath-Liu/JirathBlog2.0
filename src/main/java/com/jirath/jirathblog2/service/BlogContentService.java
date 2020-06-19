@@ -54,9 +54,18 @@ public interface BlogContentService {
      */
     void delete(int blogId);
 
+    void delete(List<Integer> ids);
     /**
      * 修改文章内容，全部替换
      * @param blog 文章内容
      */
     void fix(Blog blog);
+
+    /**
+     * 修改标题与作者
+     * @param id
+     * @param title
+     * @param author
+     */
+    void fixAT(Integer id,String title,String author);
 }

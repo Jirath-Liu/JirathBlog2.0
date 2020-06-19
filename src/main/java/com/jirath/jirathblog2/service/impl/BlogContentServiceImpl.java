@@ -9,9 +9,13 @@ import com.jirath.jirathblog2.query.PageScope;
 import com.jirath.jirathblog2.service.BlogContentService;
 import com.jirath.jirathblog2.vo.DefaultPageMsg;
 import com.jirath.jirathblog2.vo.PageMsg;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.util.Assert;
+
 import java.util.List;
 
 /**
@@ -19,6 +23,7 @@ import java.util.List;
  */
 @Service
 public class BlogContentServiceImpl implements BlogContentService {
+    Logger logger= LoggerFactory.getLogger(this.getClass());
     @Autowired
     BlogDao blogDao;
     @Autowired
@@ -75,6 +80,9 @@ public class BlogContentServiceImpl implements BlogContentService {
         return blogDao.getRandPsg();
     }
 
+    /**
+     * @param blogId
+     */
     @Override
     public void delete(int blogId) {
         commentDao.deleteByBlogId(blogId);
@@ -84,7 +92,26 @@ public class BlogContentServiceImpl implements BlogContentService {
     }
 
     @Override
+    public void delete(List<Integer> ids){
+        commentDao.deleteByBlogIdList(ids);
+        blogTagDao.deleteByBlogIdList(ids);
+        blogColumnDao.deleteByBlogIdList(ids);
+        blogDao.deleteBlogByIdList(ids);
+    }
+
+    @Override
     public void fix(Blog blog) {
         blogDao.fixBlog(blog);
+    }
+
+    @Override
+    public void fixAT(Integer id, String title, String author) {
+        Assert.notNull(id,"文章id不为空");
+        Blog blog=new Blog();
+        blog.setBlogAuthor(author);
+        blog.setBlogId(id);
+        blog.setBlogTitle(title);
+        logger.info("修改文章："+blog);
+        blogDao.fixBlogAT(blog);
     }
 }
