@@ -12,5 +12,5 @@ public class Friend {
     private Integer id;
     private String name;
     private String address;
-
+    private String desc;
 }

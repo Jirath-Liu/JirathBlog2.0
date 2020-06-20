@@ -13,5 +13,5 @@ public interface SystemService {
      * @return
      */
     Long getVisitTimes();
-    LocalDateTime getStartTime();
+    String getStartTime();
 }

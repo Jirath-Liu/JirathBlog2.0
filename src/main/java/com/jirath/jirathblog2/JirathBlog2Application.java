@@ -3,7 +3,9 @@ package com.jirath.jirathblog2;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cache.annotation.EnableCaching;
 
+@EnableCaching
 @SpringBootApplication
 @MapperScan("com.jirath.jirathblog2.dao")
 public class JirathBlog2Application {

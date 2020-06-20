@@ -26,12 +26,26 @@ public class SystemServiceImpl implements SystemService {
      */
     @Override
     public Long getVisitTimes() {
-        redisTemplate.opsForValue().increment(RedisKeyEnum.visitNum.getKey());
-        return (Long) redisTemplate.opsForValue().get(RedisKeyEnum.visitNum.getKey());
+        Long vt=(Long)redisTemplate.opsForValue().get(RedisKeyEnum.visitNum.getKey());
+        redisTemplate.opsForValue().set(RedisKeyEnum.visitNum.getKey(),new Long(vt.longValue()+1));
+        return vt;
     }
 
     @Override
-    public LocalDateTime getStartTime() {
-        return (LocalDateTime) redisTemplate.opsForValue().get(RedisKeyEnum.startTime.getKey());
+    public String getStartTime() {
+        LocalDateTime time=(LocalDateTime) redisTemplate.opsForValue().get(RedisKeyEnum.startTime.getKey());
+        StringBuffer buffer=new StringBuffer();
+        buffer.append(time.getYear());
+        buffer.append("/");
+        buffer.append(time.getMonth());
+        buffer.append("/");
+        buffer.append(time.getDayOfMonth());
+        buffer.append(" ");
+        buffer.append(time.getHour());
+        buffer.append(":");
+        buffer.append(time.getMinute());
+        buffer.append(":");
+        buffer.append(time.getSecond());
+        return buffer.toString();
     }
 }
