@@ -84,6 +84,7 @@ public class UserBasicController {
     }
     //@ResponseBody
     //@RequestMapping("/newAccount")
+    @Deprecated
     public Object newAccount(User user){
         try {
             userService.insertUser(user);

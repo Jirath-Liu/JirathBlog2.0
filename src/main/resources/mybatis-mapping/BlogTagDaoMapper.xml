@@ -13,16 +13,29 @@
     <delete id="delSpecificRecord" parameterType="BlogTag">
         DELETE FROM blog_tag WHERE tag_id=#{tagId} AND blog_id=#{blogId}
     </delete>
-    <delete id="deleteByBlogIdList">
+    <delete id="deleteByBlogIdList" parameterType="integer">
         DELETE FROM blog_tag WHERE blog_id IN
         <foreach collection="list" item="item" open="(" separator="," close=")">
             {item}
         </foreach>
     </delete>
-    <select id="getByBlogId" parameterType="int" resultType="java.lang.Integer">
-        SELECT tag_id FROM blog_tag WHERE blog_id=#{value}
+    <delete id="delByColumnId" parameterType="integer">
+        DELETE FROM blog_tag WHERE blog_id IN
+        (SELECT blog_id FROM blog WHERE blog_column_id = #{value})
+    </delete>
+    <select id="getByBlogId" parameterType="int" resultType="Tag">
+        SELECT tag.* FROM blog_tag
+        JOIN tag
+        ON blog_tag.tag_id = tag.tag_id
+        WHERE blog_tag.blog_id=#{value}
     </select>
-    <select id="getByTagId" resultType="java.lang.Integer">
+    <select id="getByTagId" parameterType="integer" resultType="java.lang.Integer">
         SELECT blog_id FROM blog_tag WHERE tag_id=#{value}
+    </select>
+    <select id="getPsgMsgByTagId" parameterType="integer" resultType="com.jirath.jirathblog2.vo.BlogSimpleVo">
+        SELECT blog_tag.blog_id, blog.blog_title FROM blog_tag
+        JOIN blog
+        ON blog_tag.blog_id=blog.blog_id
+        WHERE blog_tag.tag_id=#{value}
     </select>
 </mapper>

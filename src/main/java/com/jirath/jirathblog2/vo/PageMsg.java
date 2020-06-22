@@ -12,7 +12,7 @@ import java.util.List;
 @Data
 @Builder
 public class PageMsg {
-    private List<Blog> blogList;
+    private List<BlogVo> blogList;
     private int onPage;
     private int pageNum;
 }

@@ -8,11 +8,12 @@ import lombok.Data;
 @Data
 public class Blog {
 
-  private int blogId;
+  private Integer blogId;
   private String blogContent;
   private String blogTitle;
   private String blogAuthor;
-  private int blogCommentQuantity;
+  private Integer blogColumnId;
+  private Integer blogCommentQuantity;
   private java.util.Date blogCreateTime;
   private java.util.Date blogLastFixTime;
   private Integer visitedTime;

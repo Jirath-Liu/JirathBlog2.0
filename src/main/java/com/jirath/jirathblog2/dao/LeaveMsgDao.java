@@ -22,6 +22,7 @@ public interface LeaveMsgDao {
      */
     void deleMsg(int id);
 
+    void deleMsgList(List<Integer> ids);
     /**
      * 获取留言
      * @return 所有留言信息

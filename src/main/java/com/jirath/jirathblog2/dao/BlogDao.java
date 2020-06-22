@@ -1,7 +1,9 @@
 package com.jirath.jirathblog2.dao;
 
+import com.jirath.jirathblog2.query.FixColumn;
 import com.jirath.jirathblog2.query.PageScope;
 import com.jirath.jirathblog2.pojo.Blog;
+import com.jirath.jirathblog2.vo.BlogVo;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -17,7 +19,9 @@ public interface BlogDao {
      * 根据分类删除文章，包含子查询分类信息
      * @param columnId
      */
+    @Deprecated
     void deleteByColumn(int columnId);
+    void fixBlogColumn(FixColumn fixColumn);
     /**
      * 根据文章号获取内容
      * @param blogIdList 文章号
@@ -25,11 +29,12 @@ public interface BlogDao {
      */
     List<Blog> getMsgByBlogIdList(List<Integer> blogIdList);
     /**
+     * 多表联查，同时获取分类
      * 获取指定排序范围的blog
      * @param pageScope 页面范围，skipNum为跳过的数目，requireNum为需要的数目
      * @return 指定范围的博客的全部信息
      */
-    List<Blog> getSpecificPage(PageScope pageScope);
+    List<BlogVo> getSpecificPage(PageScope pageScope);
 
     /**
      * 获取博客数目
@@ -48,13 +53,13 @@ public interface BlogDao {
      * 获取最新记录
      * @return 最后一条文章记录
      */
-    Blog getLatest();
+    BlogVo getLatest();
 
     /**
      * 取一个随机的文章
      * @return 文章内容
      */
-    Blog getRandPsg();
+    BlogVo getRandPsg();
 
     /**
      * 根据博客Id删除博客
@@ -93,9 +98,11 @@ public interface BlogDao {
      * @param id 文章id号
      * @return 文章信息
      */
-    Blog getMsgById(int id);
+    BlogVo getMsgById(int id);
 
     void deleteBlogByIdList(List<Integer> ids);
 
-    void fixBlogAT(Blog blog);
+    void fixBlogATC(Blog blog);
+
+    List<BlogVo> getMsgByColumnId(int columnId);
 }

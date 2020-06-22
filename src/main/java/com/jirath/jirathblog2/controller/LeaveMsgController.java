@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 /**
  * @author Jirath
  */
@@ -20,6 +22,16 @@ public class LeaveMsgController {
     MsgValueUtil msgValueUtil;
     @Autowired
     LeaveMsgDao leaveMsgDao;
+
+    @RequestMapping("/all")
+    public ResultVo getAll(){
+        return ResultVo.builder()
+                .code(msgValueUtil.getSuccess())
+                .data(leaveMsgDao.getAll())
+                .msg("all leave msg")
+                .build();
+    }
+
     @RequestMapping("/add")
     public ResultVo addMsg(@RequestBody LeaveMsg msg) {
         leaveMsgDao.addMsg(msg);
@@ -37,12 +49,14 @@ public class LeaveMsgController {
                 .msg("del msg "+id)
                 .build();
     }
-    @RequestMapping("/all")
-    public ResultVo getAll(){
+    @RequiresRoles("owner")
+    @RequestMapping("/delList")
+    public ResultVo delMsgList(List<Integer> ids) {
+        leaveMsgDao.deleMsgList(ids);
         return ResultVo.builder()
                 .code(msgValueUtil.getSuccess())
-                .data(leaveMsgDao.getAll())
-                .msg("all leave msg")
+                .msg("del msgs ")
                 .build();
     }
+
 }

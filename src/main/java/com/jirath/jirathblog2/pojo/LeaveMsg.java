@@ -7,8 +7,8 @@ import lombok.Data;
  */
 @Data
 public class LeaveMsg {
-    int leaveMsgId;
-    String leaveMsg;
-    String mail;
-    String name;
+    private Integer leaveMsgId;
+    private String leaveMsg;
+    private String mail;
+    private String name;
 }

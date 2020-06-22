@@ -7,6 +7,12 @@
     <delete id="deleMsg" parameterType="int">
         DELETE FROM leave_msg WHERE leave_msg_id=#{id};
     </delete>
+    <delete id="deleMsgList" parameterType="integer">
+        DELETE FROM leave_msg WHERE leave_msg_id IN
+        <foreach collection="list" open="(" separator="," close=")" item="id">
+            #{id}
+        </foreach>
+    </delete>
     <select id="getAll" resultType="LeaveMsg">
         SELECT * FROM leave_msg
     </select>

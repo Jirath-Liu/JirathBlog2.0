@@ -32,60 +32,31 @@ public class BlogContentController {
     ColumnService columnService;
     @RequestMapping("/{blogId}")
     public Object getPsgById(@PathVariable int blogId){
-        try {
-            return ResultVo.builder()
-                    .code(msgValueUtil.getSuccess())
-                    .msg(blogId+"content")
-                    .data(blogContentService.getPsgById(blogId))
-                    .build();
-        }catch (Exception e){
-            logger.error("异常",e);
-            return ResultVo.builder()
-                    .code(msgValueUtil.getDefaultError())
-                    .msg("contentError")
-                    .data(null)
-                    .build();
-        }
-
+        return ResultVo.builder()
+                .code(msgValueUtil.getSuccess())
+                .msg(blogId + "content")
+                .data(blogContentService.getPsgById(blogId))
+                .build();
     }
     @RequestMapping("/defaultPage")
     @ResponseBody
     public Object getDefaultPageContent(){
-        try {
-            DefaultPageMsg defaultPageMsg = blogContentService.getDefaultPageContent();
-            return ResultVo.builder()
-                    .code(msgValueUtil.getSuccess())
-                    .msg("defaultPage")
-                    .data(defaultPageMsg)
-                    .build();
-        }catch (Exception e){
-            logger.error("异常",e);
-            return ResultVo.builder()
-                    .code(msgValueUtil.getDefaultError())
-                    .msg("defaultPageError")
-                    .data(null)
-                    .build();
-        }
-
+        DefaultPageMsg defaultPageMsg = blogContentService.getDefaultPageContent();
+        return ResultVo.builder()
+                .code(msgValueUtil.getSuccess())
+                .msg("defaultPage")
+                .data(defaultPageMsg)
+                .build();
     }
     @ResponseBody
     @RequestMapping("/page/{pageId}")
     public Object getSpecificPage(@PathVariable int pageId){
-        try {
-            PageMsg pageMsg= blogContentService.getSpecificPage(pageId);
-            return ResultVo.builder()
-                    .code(msgValueUtil.getSuccess())
-                    .msg("SpecificPage")
-                    .data(pageMsg)
-                    .build();
-        }catch (Exception e){
-            logger.error("异常",e);
-            return ResultVo.builder()
-                    .code(msgValueUtil.getDefaultError())
-                    .msg("getSpecificPageError")
-                    .data(null)
-                    .build();
-        }
+        PageMsg pageMsg = blogContentService.getSpecificPage(pageId);
+        return ResultVo.builder()
+                .code(msgValueUtil.getSuccess())
+                .msg("SpecificPage")
+                .data(pageMsg)
+                .build();
     }
 
     /**
@@ -94,43 +65,21 @@ public class BlogContentController {
      */
     @ResponseBody
     @RequestMapping("/recommend")
-    public Object getRecommendPsg(){
-        try {
-            Blog blog = blogContentService.getRand();
-            return ResultVo.builder()
-                    .code(msgValueUtil.getSuccess())
-                    .msg("recommend")
-                    .data(blog)
-                    .build();
-        }catch (Exception e){
-            logger.error("异常",e);
-            return ResultVo.builder()
-                    .code(msgValueUtil.getDefaultError())
-                    .msg("RecommendError")
-                    .data(null)
-                    .build();
-        }
-
+    public ResultVo getRecommendPsg(){
+        return ResultVo.builder()
+                .code(msgValueUtil.getSuccess())
+                .msg("recommend")
+                .data(blogContentService.getRand())
+                .build();
     }
     @ResponseBody
     @RequestMapping("/latest")
     public Object getLatestPsg(){
-        try {
-            Blog blog = blogContentService.getLatest();
-            return ResultVo.builder()
-                    .code(msgValueUtil.getSuccess())
-                    .msg("latest")
-                    .data(blog)
-                    .build();
-        }catch (Exception e){
-            logger.error("异常",e);
-            return ResultVo.builder()
-                    .code(msgValueUtil.getDefaultError())
-                    .msg("LatestError")
-                    .data(null)
-                    .build();
-        }
-
+        return ResultVo.builder()
+                .code(msgValueUtil.getSuccess())
+                .msg("latest")
+                .data(blogContentService.getLatest())
+                .build();
     }
 
 

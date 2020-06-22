@@ -32,23 +32,14 @@ public class CommentController {
      * @param comment
      * @return
      */
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     @RequestMapping(value = "/comment",method = RequestMethod.POST)
     public ResultVo addComment(Comment comment){
-        try {
-            commentService.comment(comment);
-            return ResultVo.builder()
-                    .code(msgValueUtil.getSuccess())
-                    .msg("comment")
-                    .build();
-        }catch (Exception e){
-            logger.error("异常",e);
-            return ResultVo.builder()
-                    .code(msgValueUtil.getDefaultError())
-                    .msg("commentError")
-                    .build();
-        }
-
+        commentService.comment(comment);
+        return ResultVo.builder()
+                .code(msgValueUtil.getSuccess())
+                .msg("comment")
+                .build();
     }
 
     /**
@@ -57,19 +48,11 @@ public class CommentController {
      */
     @RequestMapping("/delete/")
     public ResultVo addComment(@RequestBody CommentToDel comment){
-        try {
-            commentService.delComment(comment.getCommentId(),comment.getMail());
-            return ResultVo.builder()
-                    .code(msgValueUtil.getSuccess())
-                    .msg("del comment")
-                    .build();
-        }catch (Exception e){
-            logger.error("异常"+e.getMessage(),e);
-            return ResultVo.builder()
-                    .code(msgValueUtil.getDefaultError())
-                    .msg("commentError")
-                    .build();
-        }
+        commentService.delComment(comment.getCommentId(), comment.getMail());
+        return ResultVo.builder()
+                .code(msgValueUtil.getSuccess())
+                .msg("del comment")
+                .build();
 
     }
 }

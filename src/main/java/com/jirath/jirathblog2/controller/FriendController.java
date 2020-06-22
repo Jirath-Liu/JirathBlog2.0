@@ -23,6 +23,9 @@ public class FriendController {
 
     @RequestMapping(value = "/all", method = RequestMethod.GET)
     public ResultVo getAllFriends(){
-        return ResultVo.builder().data(friendDao.getAll()).code(msgValueUtil.getSuccess()).build();
+        return ResultVo.builder()
+                .data(friendDao.getAll())
+                .code(msgValueUtil.getSuccess())
+                .build();
     }
 }

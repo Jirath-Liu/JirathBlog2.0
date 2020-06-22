@@ -10,9 +10,9 @@ import java.time.LocalDateTime;
 @Data
 public class Comment {
 
-  private int commentId;
-  private int blogId;
-  private int commentOrder;
+  private Integer commentId;
+  private Integer blogId;
+  private Integer commentOrder;
   private String commentContent;
   private String commentMail;
   private String commentName;

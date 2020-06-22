@@ -28,19 +28,11 @@ public class BlogCommentController {
 
     @GetMapping("/blog/{blogId}")
     public Object getPsgComment(@PathVariable Integer blogId){
-        try {
-            return ResultVo.builder()
-                    .code(msgValueUtil.getSuccess())
-                    .data(commentService.getPsgComment(blogId))
-                    .msg("blogComment")
-                    .build();
-        } catch (Exception e) {
-            logger.error("异常",e);
-            return ResultVo.builder()
-                    .code(msgValueUtil.getDefaultError())
-                    .msg("getCommentError")
-                    .build();
-        }
+        return ResultVo.builder()
+                .code(msgValueUtil.getSuccess())
+                .data(commentService.getPsgComment(blogId))
+                .msg("blogComment")
+                .build();
     }
 
 }

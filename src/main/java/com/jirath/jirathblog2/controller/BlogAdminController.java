@@ -21,6 +21,7 @@ import java.util.List;
  * 博客管理相关，需要权限
  * @author Jirath
  */
+@Transactional(rollbackFor = Exception.class)
 @RequestMapping("/admin")
 @Controller
 @ResponseBody
@@ -33,86 +34,55 @@ public class BlogAdminController {
 
     /**
      * 添加文章
+     *
      * @param blog 文章的内容
      * @return
      */
     @RequestMapping("/blog/add")
     @ResponseBody
-    public Object addPassage(Blog blog){
-        try {
-            Blog blogNew=blogContentService.addPassage(blog);
-            logger.info("添加文章："+blog.toString());
-            return ResultVo.builder()
-                    .code(msgValueUtil.getSuccess())
-                    .msg("addPassage")
-                    .data(blogNew)
-                    .build();
-        }catch (Exception e){
-            logger.error("异常",e);
-            return ResultVo.builder()
-                    .code(msgValueUtil.getDefaultError())
-                    .msg("AddError")
-                    .data(null)
-                    .build();
-        }
-
+    public Object addPassage(Blog blog) {
+        Blog blogNew = blogContentService.addPassage(blog);
+        logger.info("添加文章：" + blog.toString());
+        return ResultVo.builder()
+                .code(msgValueUtil.getSuccess())
+                .msg("addPassage")
+                .data(blogNew)
+                .build();
     }
 
-    @Transactional(rollbackFor = Exception.class)
-    @RequestMapping(value = "/blog/delete/{blogId}",method = RequestMethod.DELETE)
+
+    @RequestMapping(value = "/blog/delete/{blogId}", method = RequestMethod.DELETE)
     public ResultVo deleteBlog(@PathVariable int blogId) {
-        try {
-            blogContentService.delete(blogId);
-            return ResultVo.builder()
-                    .code(msgValueUtil.getSuccess())
-                    .msg("delete")
-                    .build();
-        }catch (Exception e){
-            logger.error("异常",e);
-            return ResultVo.builder()
-                    .code(msgValueUtil.getDefaultError())
-                    .msg("deleteError")
-                    .build();
-        }
+        blogContentService.delete(blogId);
+        return ResultVo.builder()
+                .code(msgValueUtil.getSuccess())
+                .msg("delete")
+                .build();
 
     }
-    @Transactional
+
     @RequestMapping(value = "blog/deleteList",method = RequestMethod.POST)
     public ResultVo delBlogList(List<Integer> ids){
-        try {
-            blogContentService.delete(ids);
-            return ResultVo.builder()
-                    .code(msgValueUtil.getSuccess())
-                    .msg("delete")
-                    .build();
-        }catch (Exception e){
-            logger.error("异常",e);
-            return ResultVo.builder()
-                    .code(msgValueUtil.getDefaultError())
-                    .msg("deleteError")
-                    .build();
-        }
+        blogContentService.delete(ids);
+        return ResultVo.builder()
+                .code(msgValueUtil.getSuccess())
+                .msg("delete")
+                .build();
     }
+
     /**
      * 只可修改标题，作者，内容
+     *
      * @param blog
      * @return
      */
     @RequestMapping("/blog/fix")
-    public Object fixBlog(Blog blog){
-        try {
-            blogContentService.fix(blog);
-            return ResultVo.builder()
-                    .code(msgValueUtil.getSuccess())
-                    .msg("fix")
-                    .build();
-        }catch (Exception e){
-            logger.error("异常",e);
-            return ResultVo.builder()
-                    .code(msgValueUtil.getDefaultError())
-                    .msg("fixError")
-                    .build();
-        }
+    public Object fixBlog(Blog blog) {
+        blogContentService.fix(blog);
+        return ResultVo.builder()
+                .code(msgValueUtil.getSuccess())
+                .msg("fix")
+                .build();
     }
 
     /**
@@ -120,21 +90,13 @@ public class BlogAdminController {
      * @param title
      * @return
      */
-    @RequestMapping("/blog/fixat")
-    public Object fixBlogAT(@RequestParam Integer id,@RequestParam String title,@RequestParam String author){
-        try {
-            blogContentService.fixAT(id,title,author);
-            return ResultVo.builder()
-                    .code(msgValueUtil.getSuccess())
-                    .msg("fix")
-                    .build();
-        }catch (Exception e){
-            logger.error("异常",e);
-            return ResultVo.builder()
-                    .code(msgValueUtil.getDefaultError())
-                    .msg("fixError")
-                    .build();
-        }
+    @RequestMapping("/blog/fixatc")
+    public Object fixBlogAT(@RequestParam Integer id, @RequestParam String title, @RequestParam String author,@RequestParam Integer columnId) {
+        blogContentService.fixATC(id, title, author,columnId);
+        return ResultVo.builder()
+                .code(msgValueUtil.getSuccess())
+                .msg("fix")
+                .build();
     }
 
 }

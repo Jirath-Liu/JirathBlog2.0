@@ -20,6 +20,9 @@ spring:
   cache:
     cache-names:
       - blogsys
+      - blog
+      - tag
+      - column
     redis:
       time-to-live: 21600000
 msg:

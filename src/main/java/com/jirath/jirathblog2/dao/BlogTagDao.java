@@ -1,6 +1,8 @@
 package com.jirath.jirathblog2.dao;
 
 import com.jirath.jirathblog2.pojo.BlogTag;
+import com.jirath.jirathblog2.pojo.Tag;
+import com.jirath.jirathblog2.vo.BlogSimpleVo;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -18,11 +20,12 @@ public interface BlogTagDao {
 
     void deleteByBlogIdList(List<Integer> ids);
     /**
-     * 根据文章id获取信息
+     * 连接查询
+     * 根据文章id获取Tag信息
      * @param blogId
      * @return 标签id序列
      */
-    List<Integer> getByBlogId(int blogId);
+    List<Tag> getByBlogId(int blogId);
 
     /**
      * 标签下所有文章
@@ -47,4 +50,12 @@ public interface BlogTagDao {
      * @param blogTag
      */
     void delSpecificRecord(BlogTag blogTag);
+
+    /**
+     * 嵌套Select，必须保证在删除博客前
+     * @param columnId
+     */
+    void delByColumnId(int columnId);
+
+    List<BlogSimpleVo> getPsgMsgByTagId(Integer tagId);
 }

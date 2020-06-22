@@ -28,19 +28,11 @@ public class ColumnController {
 
     @RequestMapping("/all")
     public Object getAllColumn() {
-        try {
-            return ResultVo.builder()
-                    .code(msgValueUtil.getSuccess())
-                    .data(columnService.getAllColumn())
-                    .msg("allColumn")
-                    .build();
-        } catch (Exception e) {
-            logger.error("异常",e);
-            return ResultVo.builder()
-                    .code(msgValueUtil.getDefaultError())
-                    .msg("getColumnError")
-                    .build();
-        }
+        return ResultVo.builder()
+                .code(msgValueUtil.getSuccess())
+                .data(columnService.getAllColumn())
+                .msg("allColumn")
+                .build();
     }
 
     /**
@@ -50,87 +42,40 @@ public class ColumnController {
      */
     @RequestMapping("/{columnId}")
     public Object getSpecificColumn(@PathVariable int columnId){
-        try {
-            return ResultVo.builder()
-                    .code(msgValueUtil.getSuccess())
-                    .data(columnService.getColumnPsg(columnId))
-                    .msg(columnId+"content")
-                    .build();
-        } catch (Exception e) {
-            logger.error("异常",e);
-            return ResultVo.builder()
-                    .code(msgValueUtil.getDefaultError())
-                    .msg("getError")
-                    .build();
-        }
+        return ResultVo.builder()
+                .code(msgValueUtil.getSuccess())
+                .data(columnService.getColumnPsg(columnId))
+                .msg(columnId + "content")
+                .build();
     }
     /**
      * ======================================================================================
      *                          管理
      * ======================================================================================
      */
-    @RequestMapping("/blog/column/add/{blogId}/{columnId}")
-    public Object addPsgToColumn(@PathVariable int blogId,@PathVariable int columnId){
-        try {
-            columnService.addPsgToColumn(blogId,columnId);
-            return ResultVo.builder()
-                    .code(msgValueUtil.getSuccess())
-                    .msg("add")
-                    .build();
-        }catch (Exception e){
-            logger.error("异常",e);
-            return ResultVo.builder()
-                    .code(msgValueUtil.getDefaultError())
-                    .msg("addError")
-                    .build();
-        }
-    }
     @RequestMapping("/delete/{columnId}")
     public Object deleteColumn(@PathVariable int columnId){
-        try {
-            columnService.deleteColumnById(columnId);
-            return ResultVo.builder()
-                    .code(msgValueUtil.getSuccess())
-                    .msg("addColumn")
-                    .build();
-        }catch (Exception e){
-            logger.error("异常",e);
-            return ResultVo.builder()
-                    .code(msgValueUtil.getDefaultError())
-                    .msg("addError")
-                    .build();
-        }
+        columnService.deleteColumnById(columnId);
+        return ResultVo.builder()
+                .code(msgValueUtil.getSuccess())
+                .msg("addColumn")
+                .build();
+
     }
     @RequestMapping("/add")
     public Object addColumn(@PathVariable String presentation){
-        try {
-            columnService.addColumn(presentation);
-            return ResultVo.builder()
-                    .code(msgValueUtil.getSuccess())
-                    .msg("addColumn")
-                    .build();
-        }catch (Exception e){
-            logger.error("异常",e);
-            return ResultVo.builder()
-                    .code(msgValueUtil.getDefaultError())
-                    .msg("addError")
-                    .build();
-        }
+        columnService.addColumn(presentation);
+        return ResultVo.builder()
+                .code(msgValueUtil.getSuccess())
+                .msg("addColumn")
+                .build();
     }
     @RequestMapping("/fix/{columnId}/{name}")
     public Object fixColumn(@PathVariable int columnId,@PathVariable String name){
-        try {
-            columnService.fixColumnMsg(columnId,name);
-            return ResultVo.builder()
-                    .code(msgValueUtil.getSuccess())
-                    .msg("addColumn")
-                    .build();
-        }catch (Exception e){
-            logger.error("异常",e);
-            return ResultVo.builder()
-                    .code(msgValueUtil.getDefaultError())
-                    .msg("addError")
-                    .build();
-        }
+        columnService.fixColumnMsg(columnId,name);
+        return ResultVo.builder()
+                .code(msgValueUtil.getSuccess())
+                .msg("addColumn")
+                .build();
     }
 }

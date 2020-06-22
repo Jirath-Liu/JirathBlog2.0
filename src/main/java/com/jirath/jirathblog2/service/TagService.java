@@ -2,6 +2,10 @@ package com.jirath.jirathblog2.service;
 
 import com.jirath.jirathblog2.pojo.BlogTag;
 import com.jirath.jirathblog2.pojo.Tag;
+import com.jirath.jirathblog2.vo.BlogSimpleVo;
+import com.jirath.jirathblog2.vo.BlogVo;
+
+import java.util.List;
 
 /**
  * @author Jirath
@@ -41,7 +45,12 @@ public interface TagService {
      * 所有标签
      * @return
      */
-    Object getAll();
+    List<Tag> getAll();
+    List<BlogSimpleVo> getPsgByTagId(Integer tagId);
 
-    Object getByBlogId(Integer blogId);
+    List<Tag> getByBlogId(Integer blogId);
+
+    void delByColumnId(int columnId);
+
+    void setTagListToBlogVoList(List<BlogVo> list);
 }

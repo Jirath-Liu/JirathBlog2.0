@@ -9,8 +9,8 @@ import lombok.Data;
 @Data
 public class UserIdentity {
 
-  private int userId;
-  private int userIdentity;
+  private Integer userId;
+  private Integer userIdentity;
 
   public UserIdentity(int userId, int userIdentity) {
     this.userId = userId;

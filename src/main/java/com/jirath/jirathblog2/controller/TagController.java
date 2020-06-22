@@ -17,7 +17,8 @@ import org.springframework.web.bind.annotation.RestController;
  * @date 2020/4/23
  * @description:
  */
-@RestController("/tag")
+@RestController
+@RequestMapping("/tag")
 public class TagController {
     private final Logger logger = LoggerFactory.getLogger(getClass());
     @Autowired
@@ -27,116 +28,69 @@ public class TagController {
 
     @RequestMapping("/all")
     public Object getAllTag(){
-        try {
-            return ResultVo.builder()
-                    .data(tagService.getAll())
-                    .code(msgValueUtil.getSuccess())
-                    .msg("allTag")
-                    .build();
-        }catch (Exception e){
-            logger.error("异常",e);
-            return ResultVo.builder()
-                    .code(msgValueUtil.getDefaultError())
-                    .msg("newTagError")
-                    .build();
-        }
+        return ResultVo.builder()
+                .data(tagService.getAll())
+                .code(msgValueUtil.getSuccess())
+                .msg("allTag")
+                .build();
     }
 
+    @RequestMapping("/blog")
+    public Object getBlogsByTag(Integer tagId){
+        return ResultVo.builder()
+                .data(tagService.getPsgByTagId(tagId))
+                .code(msgValueUtil.getSuccess())
+                .msg("allTag")
+                .build();
+    }
     @RequestMapping("/search/{blogId}")
-    public Object getBlogTag(@PathVariable Integer blogId){
-        try {
-            return ResultVo.builder()
-                    .data(tagService.getByBlogId(blogId))
-                    .code(msgValueUtil.getSuccess())
-                    .msg("allTag")
-                    .build();
-        }catch (Exception e){
-            logger.error("异常",e);
-            return ResultVo.builder()
-                    .code(msgValueUtil.getDefaultError())
-                    .msg("newTagError")
-                    .build();
-        }
+    public Object getBlogTags(@PathVariable Integer blogId){
+        return ResultVo.builder()
+                .data(tagService.getByBlogId(blogId))
+                .code(msgValueUtil.getSuccess())
+                .msg("allTag")
+                .build();
     }
 
-    @RequestMapping("/tag/add")
+    @RequestMapping("/add")
     public Object addTag(Tag tag){
-        try {
-            tagService.addTag(tag);
-            return ResultVo.builder()
-                    .code(msgValueUtil.getSuccess())
-                    .msg("newTag")
-                    .build();
-        }catch (Exception e){
-            logger.error("异常",e);
-            return ResultVo.builder()
-                    .code(msgValueUtil.getDefaultError())
-                    .msg("newTagError")
-                    .build();
-        }
+        tagService.addTag(tag);
+        return ResultVo.builder()
+                .code(msgValueUtil.getSuccess())
+                .msg("newTag")
+                .build();
     }
     @RequestMapping("/blog/tag")
     public Object addPsgToTag(BlogTag blogTag){
-        try {
-            tagService.addPsgToTag(blogTag);
-            return ResultVo.builder()
-                    .code(msgValueUtil.getSuccess())
-                    .msg("addTag")
-                    .build();
-        }catch (Exception e){
-            logger.error("异常",e);
-            return ResultVo.builder()
-                    .code(msgValueUtil.getDefaultError())
-                    .msg("addError")
-                    .build();
-        }
+        tagService.addPsgToTag(blogTag);
+        return ResultVo.builder()
+                .code(msgValueUtil.getSuccess())
+                .msg("addTag")
+                .build();
     }
     @RequestMapping("/blog/delTag")
     public Object delPsgInTag(BlogTag blogTag){
-        try {
-            tagService.delBlogInTag(blogTag);
-            return ResultVo.builder()
-                    .code(msgValueUtil.getSuccess())
-                    .msg("delBlogTag")
-                    .build();
-        }catch (Exception e){
-            logger.error("异常",e);
-            return ResultVo.builder()
-                    .code(msgValueUtil.getDefaultError())
-                    .msg("delError")
-                    .build();
-        }
+        tagService.delBlogInTag(blogTag);
+        return ResultVo.builder()
+                .code(msgValueUtil.getSuccess())
+                .msg("delBlogTag")
+                .build();
+
     }
-    @RequestMapping("/tag/delete/{tagId}")
+    @RequestMapping("delete/{tagId}")
     public Object delTag(@PathVariable int tagId){
-        try {
-            tagService.delTag(tagId);
-            return ResultVo.builder()
-                    .code(msgValueUtil.getSuccess())
-                    .msg("delTag")
-                    .build();
-        }catch (Exception e){
-            logger.error("异常",e);
-            return ResultVo.builder()
-                    .code(msgValueUtil.getDefaultError())
-                    .msg("delError")
-                    .build();
-        }
+        tagService.delTag(tagId);
+        return ResultVo.builder()
+                .code(msgValueUtil.getSuccess())
+                .msg("delTag")
+                .build();
     }
-    @RequestMapping("/tag/fix")
+    @RequestMapping("fix")
     public Object fixTag(Tag tag){
-        try {
-            tagService.fixTag(tag);
-            return ResultVo.builder()
-                    .code(msgValueUtil.getSuccess())
-                    .msg("fixTag")
-                    .build();
-        }catch (Exception e){
-            logger.error("异常",e);
-            return ResultVo.builder()
-                    .code(msgValueUtil.getDefaultError())
-                    .msg("fixError")
-                    .build();
-        }
+        tagService.fixTag(tag);
+        return ResultVo.builder()
+                .code(msgValueUtil.getSuccess())
+                .msg("fixTag")
+                .build();
     }
 }

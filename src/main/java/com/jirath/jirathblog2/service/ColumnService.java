@@ -1,6 +1,7 @@
 package com.jirath.jirathblog2.service;
 
 import com.jirath.jirathblog2.pojo.Column;
+import com.jirath.jirathblog2.vo.BlogVo;
 
 import java.util.List;
 
@@ -32,19 +33,12 @@ public interface ColumnService {
      * @param columnId
      * @return
      */
-    Object getColumnPsg(int columnId);
+    List<BlogVo> getColumnPsg(int columnId);
 
     /**
      * 根据分类id删除相关信息
      * @param columnId
      */
     void deleteColumnById(int columnId);
-
-    /**
-     * 向分类中添加文章
-     * @param psgId 文章号
-     * @param columnId 分类号
-     */
-    void addPsgToColumn(int psgId,int columnId);
 
 }

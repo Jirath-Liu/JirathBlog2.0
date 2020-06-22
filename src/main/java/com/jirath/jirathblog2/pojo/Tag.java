@@ -8,8 +8,7 @@ import lombok.Data;
 @Data
 public class Tag {
 
-  private int tagId;
+  private Integer tagId;
   private String tagName;
-
 
 }

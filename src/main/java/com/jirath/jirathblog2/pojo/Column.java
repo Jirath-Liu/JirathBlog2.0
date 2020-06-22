@@ -8,7 +8,7 @@ import lombok.Data;
 @Data
 public class Column {
 
-  private int columnId;
+  private Integer columnId;
   private String columnPresentation;
 
   public Column(int columnId, String columnPresentation) {

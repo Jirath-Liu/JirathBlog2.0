@@ -1,6 +1,7 @@
 package com.jirath.jirathblog2.dao;
 
 import com.jirath.jirathblog2.pojo.Column;
+import org.apache.ibatis.annotations.Delete;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -27,4 +28,7 @@ public interface ColumnDao {
      * @param column 信息
      */
     void fixMsg(Column column);
+
+    @Delete("DELETE FROM blog WHERE column_id = #{value}")
+    void deleteColumn(int columnId);
 }
