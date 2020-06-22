@@ -35,7 +35,7 @@ public class ColumnServiceImpl implements ColumnService {
         columnDao.addColumn(description);
     }
 
-    @Cacheable(cacheNames = "column",key = "root.methodName")
+    @Cacheable(cacheNames = "column",key = "#root.methodName")
     @Override
     public List<Column> getAllColumn() {
         return columnDao.getAll();

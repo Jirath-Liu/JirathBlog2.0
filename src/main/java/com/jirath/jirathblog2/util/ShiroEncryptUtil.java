@@ -15,7 +15,7 @@ public class ShiroEncryptUtil {
         ByteSource salt = ByteSource.Util.bytes(saltSetting);
         String hashAlgorithmName = "MD5";
         //加密次数
-        int hashInteractions = 1024;
+        int hashInteractions = SystemSettingUtil.shiroHashInteractions;
         String result = new SimpleHash(hashAlgorithmName, string, ByteSource.Util.bytes(salt), hashInteractions).toHex();
         return result;
     }

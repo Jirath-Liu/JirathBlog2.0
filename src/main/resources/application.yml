@@ -23,6 +23,7 @@ spring:
       - blog
       - tag
       - column
+      - leaveMsg
     redis:
       time-to-live: 21600000
 msg:

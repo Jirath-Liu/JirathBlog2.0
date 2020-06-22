@@ -4,6 +4,7 @@ import com.jirath.jirathblog2.pojo.Column;
 import com.jirath.jirathblog2.pojo.Tag;
 import lombok.Data;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -12,7 +13,7 @@ import java.util.List;
  * @description:
  */
 @Data
-public class BlogVo {
+public class BlogVo implements Serializable {
     private Integer blogId;
     private String blogContent;
     private String blogTitle;
@@ -21,9 +22,11 @@ public class BlogVo {
     private Integer blogCommentQuantity;
     private java.util.Date blogCreateTime;
     private java.util.Date blogLastFixTime;
-    private Integer visitedTime;
+    private Integer visitTime;
 
-    private String column_name;
+    private String columnName;
 
     private List<Tag> tags;
+
+    private static final long serialVersionUID = -8742448824652078965L;
 }

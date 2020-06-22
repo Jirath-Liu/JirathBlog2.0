@@ -6,6 +6,7 @@ package com.jirath.jirathblog2.util;
  * @description:
  */
 public class SystemSettingUtil {
+    public static final int shiroHashInteractions=2;
     private static int defaultColumn=1;
 
     public static int getDefaultColumn() {

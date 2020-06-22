@@ -68,7 +68,7 @@ public class BlogContentServiceImpl implements BlogContentService {
                 .build();
     }
 
-    @Cacheable(cacheNames = "blog",key = "#root.methodName+root.args[0]")
+    @Cacheable(cacheNames = "blog",key = "#root.methodName+#page")
     @Override
     public PageMsg getSpecificPage(int page) {
         int blogNum=blogDao.getBlogNum();

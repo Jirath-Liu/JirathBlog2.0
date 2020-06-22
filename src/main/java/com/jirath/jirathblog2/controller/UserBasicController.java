@@ -83,7 +83,7 @@ public class UserBasicController {
                 .build();
     }
     //@ResponseBody
-    //@RequestMapping("/newAccount")
+    @RequestMapping("/newAccount")
     @Deprecated
     public Object newAccount(User user){
         try {

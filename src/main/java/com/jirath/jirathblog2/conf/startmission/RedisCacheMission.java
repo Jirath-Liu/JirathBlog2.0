@@ -6,6 +6,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.core.annotation.Order;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 
@@ -18,6 +21,7 @@ import java.time.LocalDateTime;
  */
 @Component
 @Slf4j
+@Order
 public class RedisCacheMission implements ApplicationRunner {
 
     @Autowired
@@ -30,10 +34,17 @@ public class RedisCacheMission implements ApplicationRunner {
     @Override
     public void run(ApplicationArguments args) throws Exception {
         log.info("初始化任务，执行系统信息Redis存储");
+        //因为设置了版本号，不需要再考虑刷新缓存
+        // cleanCache();
         //设置两个缓存
         LocalDateTime now = LocalDateTime.now();
         systemDao.updateStartTimes(now);
         redisTemplate.opsForValue().set(RedisKeyEnum.startTime.getKey(),now);
         redisTemplate.opsForValue().set(RedisKeyEnum.visitNum.getKey(),systemDao.getVisitTimes());
+    }
+
+    @CacheEvict(cacheNames = {"blog","tag","column"},allEntries = true)
+    public void cleanCache(){
+        log.info("清空缓存");
     }
 }
