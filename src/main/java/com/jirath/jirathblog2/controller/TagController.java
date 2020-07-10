@@ -35,8 +35,8 @@ public class TagController {
                 .build();
     }
 
-    @RequestMapping("/blog")
-    public Object getBlogsByTag(Integer tagId){
+    @RequestMapping("/blog/{tagId}")
+    public Object getBlogsByTag(@PathVariable Integer tagId){
         return ResultVo.builder()
                 .data(tagService.getPsgByTagId(tagId))
                 .code(msgValueUtil.getSuccess())

@@ -7,10 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * Can be accessed by all
@@ -62,15 +59,15 @@ public class ColumnController {
                 .build();
 
     }
-    @RequestMapping("/add")
-    public Object addColumn(@PathVariable String presentation){
-        columnService.addColumn(presentation);
+    @RequestMapping(value = "/add/{name}",method = RequestMethod.POST)
+    public Object addColumn(@PathVariable String name){
+        columnService.addColumn(name);
         return ResultVo.builder()
                 .code(msgValueUtil.getSuccess())
                 .msg("addColumn")
                 .build();
     }
-    @RequestMapping("/fix/{columnId}/{name}")
+    @RequestMapping(value = "/fix/{columnId}/{name}")
     public Object fixColumn(@PathVariable int columnId,@PathVariable String name){
         columnService.fixColumnMsg(columnId,name);
         return ResultVo.builder()

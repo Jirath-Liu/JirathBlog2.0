@@ -15,6 +15,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.List;
 
 /**
@@ -23,7 +25,7 @@ import java.util.List;
  */
 @Transactional(rollbackFor = Exception.class)
 @RequestMapping("/admin")
-@Controller
+@RestController
 @ResponseBody
 public class BlogAdminController {
     private final Logger logger = LoggerFactory.getLogger(getClass());
@@ -38,9 +40,10 @@ public class BlogAdminController {
      * @param blog 文章的内容
      * @return
      */
-    @RequestMapping("/blog/add")
+    @RequestMapping(value = "/blog/add",method = RequestMethod.POST)
     @ResponseBody
-    public Object addPassage(Blog blog) {
+    public Object addPassage(Blog blog) throws UnsupportedEncodingException {
+        blog.setBlogContent(URLDecoder.decode(blog.getBlogContent(),"utf-8"));
         Blog blogNew = blogContentService.addPassage(blog);
         logger.info("添加文章：" + blog.toString());
         return ResultVo.builder()
@@ -51,7 +54,7 @@ public class BlogAdminController {
     }
 
 
-    @RequestMapping(value = "/blog/delete/{blogId}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/blog/delete/{blogId}", method = RequestMethod.GET)
     public ResultVo deleteBlog(@PathVariable int blogId) {
         blogContentService.delete(blogId);
         return ResultVo.builder()
@@ -76,8 +79,9 @@ public class BlogAdminController {
      * @param blog
      * @return
      */
-    @RequestMapping("/blog/fix")
-    public Object fixBlog(Blog blog) {
+    @RequestMapping(value = "/blog/fix",method = RequestMethod.POST)
+    public Object fixBlog(Blog blog) throws UnsupportedEncodingException {
+        blog.setBlogContent(URLDecoder.decode(blog.getBlogContent(),"utf-8"));
         blogContentService.fix(blog);
         return ResultVo.builder()
                 .code(msgValueUtil.getSuccess())
@@ -90,7 +94,7 @@ public class BlogAdminController {
      * @param title
      * @return
      */
-    @RequestMapping("/blog/fixatc")
+    @RequestMapping(value = "/blog/fixatc",method = RequestMethod.POST)
     public Object fixBlogAT(@RequestParam Integer id, @RequestParam String title, @RequestParam String author,@RequestParam Integer columnId) {
         blogContentService.fixATC(id, title, author,columnId);
         return ResultVo.builder()

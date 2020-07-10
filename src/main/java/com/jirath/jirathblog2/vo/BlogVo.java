@@ -3,6 +3,7 @@ package com.jirath.jirathblog2.vo;
 import com.jirath.jirathblog2.pojo.Column;
 import com.jirath.jirathblog2.pojo.Tag;
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serializable;
 import java.util.List;
@@ -20,7 +21,9 @@ public class BlogVo implements Serializable {
     private String blogAuthor;
     private Integer blogColumnId;
     private Integer blogCommentQuantity;
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private java.util.Date blogCreateTime;
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private java.util.Date blogLastFixTime;
     private Integer visitTime;
 

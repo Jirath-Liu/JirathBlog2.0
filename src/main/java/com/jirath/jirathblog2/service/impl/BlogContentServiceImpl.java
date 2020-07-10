@@ -96,7 +96,8 @@ public class BlogContentServiceImpl implements BlogContentService {
     @CacheEvict(cacheNames = "blog",allEntries = true)
     @Override
     public Blog addPassage(Blog blog) {
-        if (blog.getBlogColumnId()==null) blog.setBlogColumnId(1);
+        logger.info("清除缓存");
+        if (blog.getBlogColumnId()==null) blog.setBlogColumnId(SystemSettingUtil.getDefaultColumn());
         blogDao.addPassage(blog);
         return blog;
     }

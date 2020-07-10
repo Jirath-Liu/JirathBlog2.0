@@ -57,5 +57,10 @@ public interface BlogTagDao {
      */
     void delByColumnId(int columnId);
 
+    /**
+     * 连接查询，结果为博客对象
+     * @param tagId
+     * @return
+     */
     List<BlogSimpleVo> getPsgMsgByTagId(Integer tagId);
 }

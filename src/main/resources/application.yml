@@ -24,8 +24,13 @@ spring:
       - tag
       - column
       - leaveMsg
+      - share
     redis:
       time-to-live: 21600000
+
+server.tomcat.remote_ip_header: x-forwarded-for
+server.tomcat.protocol_header: x-forwarded-proto
+server.tomcat.port-header: X-Forwarded-Port
 msg:
   success: 100
   unLogin: 201
@@ -40,3 +45,5 @@ shiro-role: user,admin,owner
 shiro-salt: jirath
 
 blog-num-every-page: 5
+server:
+  forward-headers-strategy: native

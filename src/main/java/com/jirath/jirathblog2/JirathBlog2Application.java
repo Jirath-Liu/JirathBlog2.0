@@ -13,6 +13,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 public class JirathBlog2Application {
 
     public static void main(String[] args) {
+        System.setProperty("tomcat.util.http.parser.HttpParser.requestTargetAllow","[]");
         SpringApplication.run(JirathBlog2Application.class, args);
     }
 
