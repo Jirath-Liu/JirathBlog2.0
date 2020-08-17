@@ -41,6 +41,7 @@ public class RedisCacheMission implements ApplicationRunner {
         systemDao.updateStartTimes(now);
         redisTemplate.opsForValue().set(RedisKeyEnum.startTime.getKey(),now);
         redisTemplate.opsForValue().set(RedisKeyEnum.visitNum.getKey(),systemDao.getVisitTimes());
+        log.info("初始化完成");
     }
 
     @CacheEvict(cacheNames = {"blog","tag","column"},allEntries = true)

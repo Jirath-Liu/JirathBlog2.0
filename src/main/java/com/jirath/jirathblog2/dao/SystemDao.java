@@ -13,12 +13,12 @@ import java.time.LocalDateTime;
  */
 @Repository
 public interface SystemDao {
-    @Select("SELECT visit_times FROM system")
+    @Select("SELECT visit_times FROM `system`")
     Long getVisitTimes();
-    @Select("SELECT start_time FROM system")
+    @Select("SELECT start_time FROM `system`")
     LocalDateTime getStartTime();
-    @Update("UPDATE system SET visit_times=#{value}")
+    @Update("UPDATE `system` SET visit_times=#{value}")
     void updateVisitTimes(Long times);
-    @Update("UPDATE system SET start_time=#{value}")
+    @Update("UPDATE `system` SET start_time=#{value}")
     void updateStartTimes(LocalDateTime time);
 }

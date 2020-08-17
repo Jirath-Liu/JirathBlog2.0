@@ -23,8 +23,8 @@
         WHERE blog_id=#{blogId}
     </update>
     <update id="fixBlogColumn" parameterType="com.jirath.jirathblog2.query.FixColumn">
-        UPDATE blog SET blog_column=#{newColumnId} , blog_last_fix_time=now()
-        WHERE blog_column=#{originColumnId}
+        UPDATE blog SET blog_column_id=#{newColumnId} , blog_last_fix_time=now()
+        WHERE blog_column_id=#{originColumnId}
     </update>
 
     <delete id="deleteBlogById" parameterType="integer">

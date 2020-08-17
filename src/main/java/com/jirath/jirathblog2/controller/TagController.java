@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -53,7 +54,7 @@ public class TagController {
     }
 
     @RequestMapping("/add")
-    public Object addTag(Tag tag){
+    public Object addTag(@RequestBody Tag tag){
         tagService.addTag(tag);
         return ResultVo.builder()
                 .code(msgValueUtil.getSuccess())
@@ -61,7 +62,7 @@ public class TagController {
                 .build();
     }
     @RequestMapping("/blog/tag")
-    public Object addPsgToTag(BlogTag blogTag){
+    public Object addPsgToTag(@RequestBody BlogTag blogTag){
         tagService.addPsgToTag(blogTag);
         return ResultVo.builder()
                 .code(msgValueUtil.getSuccess())
@@ -69,7 +70,7 @@ public class TagController {
                 .build();
     }
     @RequestMapping("/blog/delTag")
-    public Object delPsgInTag(BlogTag blogTag){
+    public Object delPsgInTag(@RequestBody BlogTag blogTag){
         tagService.delBlogInTag(blogTag);
         return ResultVo.builder()
                 .code(msgValueUtil.getSuccess())

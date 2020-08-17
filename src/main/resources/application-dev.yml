@@ -1,7 +1,7 @@
 server:
   port: 80
   servlet:
-    context-path: /
+    context-path: /api
 
 spring:
   datasource:
@@ -12,7 +12,7 @@ spring:
 
 cors:
   allowedHeader: GFkk6vdyDOE1TQJ4UKiPq9
-  allowedOrigins: http://localhost:5500
+  allowedOrigins: http://localhost:8080
 
 mybatis:
   type-aliases-package: com.jirath.jirathblog2.pojo,com.jirath.jirathblog2.query

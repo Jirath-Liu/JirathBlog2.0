@@ -42,7 +42,7 @@ public class BlogAdminController {
      */
     @RequestMapping(value = "/blog/add",method = RequestMethod.POST)
     @ResponseBody
-    public Object addPassage(Blog blog) throws UnsupportedEncodingException {
+    public Object addPassage(@RequestBody Blog blog) throws UnsupportedEncodingException {
         blog.setBlogContent(URLDecoder.decode(blog.getBlogContent(),"utf-8"));
         Blog blogNew = blogContentService.addPassage(blog);
         logger.info("添加文章：" + blog.toString());
@@ -80,7 +80,7 @@ public class BlogAdminController {
      * @return
      */
     @RequestMapping(value = "/blog/fix",method = RequestMethod.POST)
-    public Object fixBlog(Blog blog) throws UnsupportedEncodingException {
+    public Object fixBlog(@RequestBody Blog blog) throws UnsupportedEncodingException {
         blog.setBlogContent(URLDecoder.decode(blog.getBlogContent(),"utf-8"));
         blogContentService.fix(blog);
         return ResultVo.builder()
@@ -90,11 +90,12 @@ public class BlogAdminController {
     }
 
     /**
+     * @RequestParam 该注解将导致这个接口只能使用链接参数传递请求
      * 修改作者和标题
      * @param title
      * @return
      */
-    @RequestMapping(value = "/blog/fixatc",method = RequestMethod.POST)
+    @RequestMapping(value = "/blog/fixatc",method = RequestMethod.GET)
     public Object fixBlogAT(@RequestParam Integer id, @RequestParam String title, @RequestParam String author,@RequestParam Integer columnId) {
         blogContentService.fixATC(id, title, author,columnId);
         return ResultVo.builder()

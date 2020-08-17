@@ -40,7 +40,6 @@ public class UserBasicController {
         try {
             subject.login(passwordToken);
         }catch (UnknownAccountException e){
-            logger.error("无账号"+account,e);
             return ResultVo.builder()
                     .code(msgValueUtil.getNoAccount())
                     .msg("loginFailed")

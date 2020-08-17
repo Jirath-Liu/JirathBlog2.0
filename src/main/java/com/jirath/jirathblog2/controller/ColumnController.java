@@ -55,7 +55,7 @@ public class ColumnController {
         columnService.deleteColumnById(columnId);
         return ResultVo.builder()
                 .code(msgValueUtil.getSuccess())
-                .msg("addColumn")
+                .msg("delColumn")
                 .build();
 
     }

@@ -30,6 +30,12 @@ public class BlogContentController {
     BlogContentService blogContentService;
     @Autowired
     ColumnService columnService;
+
+    /**
+     * 需要增加空指针检测
+     * @param blogId
+     * @return
+     */
     @RequestMapping("/{blogId}")
     public Object getPsgById(@PathVariable int blogId){
         return ResultVo.builder()
@@ -39,7 +45,6 @@ public class BlogContentController {
                 .build();
     }
     @RequestMapping("/defaultPage")
-    @ResponseBody
     public Object getDefaultPageContent(){
         DefaultPageMsg defaultPageMsg = blogContentService.getDefaultPageContent();
         return ResultVo.builder()

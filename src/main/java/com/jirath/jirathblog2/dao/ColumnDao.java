@@ -29,6 +29,6 @@ public interface ColumnDao {
      */
     void fixMsg(Column column);
 
-    @Delete("DELETE FROM blog WHERE column_id = #{value}")
+    @Delete("DELETE FROM `column` WHERE column_id = #{value}")
     void deleteColumn(int columnId);
 }

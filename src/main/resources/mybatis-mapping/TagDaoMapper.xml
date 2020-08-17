@@ -2,10 +2,10 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.jirath.jirathblog2.dao.TagDao">
     <insert id="newTag" parameterType="Tag">
-        INSERT INTO tag (tag__name) values (#{tagName})
+        INSERT INTO tag (tag_name) values (#{tagName})
     </insert>
     <update id="fixTag" parameterType="Tag">
-        UPDATE tag SET tag__name=#{tagName}
+        UPDATE tag SET tag_name=#{tagName}
         WHERE tag_id=#{tagId}
     </update>
     <delete id="delTag" parameterType="int">
