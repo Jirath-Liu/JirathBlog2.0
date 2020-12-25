@@ -9,7 +9,7 @@ spring:
   redis:
     host: 123.57.16.225
     password: jirath
-    timeout: 60
+    timeout: 3000
     database: 0
     lettuce:
       pool:
